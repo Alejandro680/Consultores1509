@@ -1,0 +1,843 @@
+/* ---------------- NAVBAR ---------------- */
+.navbar {
+  background-color: #01202cee;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(7px);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 2.5rem;
+  opacity: 0.9;
+  transition: width 0.3s ease;
+}
+
+.navbar-brand img {
+  height: 115px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.nav-link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-left: 1rem;
+  transition: color 0.3s ease;
+}
+.nav-link:hover {
+  color: #ffcf33;
+}
+.nav-link.active {
+  font-weight: bold;
+  color: #ffc107;
+}
+
+/* ---------------- CAROUSEL ---------------- */
+#mainCarousel {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+#mainCarousel .carousel-item img {
+  height: 710px;
+  object-fit: cover;
+}
+.carousel-indicators [data-bs-target] {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #797979cb;
+  margin: 0 6px;
+  opacity: 1;
+}
+.carousel-indicators .active {
+  background-color: #ffffff;
+  border-color: #ffffffe7;
+}
+
+/* ---------------- SCROLLSPY ---------------- */
+.scrollspy-example {
+  scroll-behavior: smooth; /* Para que el scroll al hacer clic sea suave */
+}
+
+.counter {
+  transition: transform 0.3s ease;
+}
+
+.card:hover .counter {
+  transform: scale(1.1);
+  color: #007bff; /* O el color principal de tu marca */
+}
+
+/* ============================================================
+   3. QUIÉNES SOMOS (DESCRIPCIÓN & BOTÓN)
+   ============================================================ */
+
+/* Aseguramos que use la fuente Montserrat si está cargada */
+.description-area {
+  font-family: 'Montserrat', sans-serif;
+  text-align: left; /* Alineación a la izquierda */
+}
+
+/* Título Principal (CONSULTORES 1509) */
+.brand-title {
+  color: #01202c; /* El color oscuro de tu marca/navbar */
+  letter-spacing: -1px; /* Unir un poco las letras para fuerza visual */
+}
+
+/* Subtítulo */
+.brand-subtitle {
+  letter-spacing: 0.5px;
+}
+
+/* Párrafos de texto */
+.description-area p {
+  font-size: 1rem;
+  line-height: 1.7; /* Mejor interlineado para lectura */
+}
+
+/* Botón Sólido y Oscuro (como en la imagen) */
+.btn-brand-dark {
+  background-color: #01202c; /* Fondo oscuro */
+  color: #ffffff; /* Texto blanco */
+  border: none;
+  border-radius: 30px; /* Esquinas muy redondeadas */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-brand-dark:hover {
+  background-color: #ffcf33; /* El dorado de tu hover */
+  color: #01202c; /* Texto oscuro en hover */
+  transform: translateY(-2px); /* Pequeño levante */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Clase auxiliar para el tamaño de fuente del botón */
+.fs-7 {
+  font-size: 0.85rem;
+}
+
+/* -------------------------------------------------------------------------- */
+
+/* Esto hace que el navegador se detenga antes de llegar al ID */
+section {
+  opacity: 0;
+  transform: translateY(50px); /* Empiezan un poco abajo */
+  transition: all 0.8s ease-out;
+  scroll-margin-top: 180px; /* Para que el scroll no pegue al borde */
+}
+
+/* Esta clase la pondrá el Intersection Observer */
+section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Efecto opcional: La sección que seleccionas desde el menú
+   puede aparecer más rápido */
+.section-instant {
+  transition: opacity 0.4s ease-in !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Opcional: Para que el movimiento sea suave y no un salto brusco */
+html {
+  scroll-padding-top: 180px; /* Esto afecta a todos los saltos de ancla en la página */
+  scroll-behavior: smooth;
+}
+
+/* ---------------- STATS ---------------- */
+/* ---------------- STATS (Diseño Cápsula) ---------------- */
+.stats-area {
+  background: transparent; /* Quitamos el fondo blanco cuadrado */
+  padding: 10px;
+  box-shadow: none; /* Quitamos la sombra de la caja contenedora */
+}
+
+/* Contenedor de cada fila de estadística */
+.stat-row-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: 25px; /* Espacio entre cápsulas */
+}
+
+/* La cápsula oscura (Puck) con tu color de Navbar */
+.stat-puck {
+  background-color: #01202c; /* Color de tu navbar para consistencia */
+  color: #ffffff;
+  height: 55px;
+  min-width: 160px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.plus-sign {
+  font-size: 1.1rem;
+  margin-right: 4px;
+  color: #ffcf33; /* Color dorado de tus links en hover */
+}
+
+/* El círculo blanco que contiene el icono */
+.stat-icon-circle {
+  background-color: #ffffff;
+  color: #01202c;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 5px solid #01202c; /* El borde que "muerde" la cápsula */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: -31px; /* Desplazamiento exacto */
+  z-index: 2;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+}
+
+.stat-icon-circle i {
+  font-size: 1.5rem;
+}
+
+/* El texto que va después del icono */
+.stat-label-text {
+  margin-left: 45px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  color: #01202c;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+/* Ajuste para que el contador se vea bien */
+.counter {
+  display: inline-block;
+}
+
+/* ------------------------------------------------------- */
+
+/* ---------------- SEPARADOR DE BALANZA ---------------- */
+.separator-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 60px 0; /* Espaciado arriba y abajo */
+  width: 100%;
+}
+
+/* Las líneas laterales */
+.separator-container .line {
+  height: 2px;
+  flex-grow: 1; /* Hace que las líneas ocupen el espacio disponible */
+  background: linear-gradient(to right, transparent, #d4af37, transparent);
+  opacity: 0.6;
+}
+
+/* Contenedor del separador vertical */
+.vertical-divider-container {
+  display: flex;
+  flex-direction: column;
+  height: 300px; /* Ajusta según el alto de tu texto */
+}
+
+.vertical-line {
+  width: 2px;
+  background-color: #01202c;
+  flex-grow: 1;
+  opacity: 0.3;
+}
+
+/* Asegura que la imagen quepa en el círculo */
+.img-icon-stat {
+    width: 80px;       /* Ajusta este tamaño según tu diseño */
+    height: 100px;      /* Debe ser igual al width */
+    object-fit: contain;
+    display: block;
+
+}
+
+/* Opcional: Centrar la imagen si el círculo es un flexbox */
+.stat-icon-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ajustes de tipografía para la izquierda */
+.brand-title {
+  color: #01202c;
+  font-size: 1.8rem;
+}
+
+.brand-subtitle {
+  color: #01202c;
+  font-style: italic;
+}
+
+.description-area p {
+  text-align: justify;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Botón sólido redondeado */
+.btn-brand-dark {
+  background-color: #01202c;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+
+
+/* Aseguramos que en móvil el separador desaparezca y deje espacio */
+@media (max-width: 767px) {
+  .vertical-divider-container {
+    display: none !important;
+  }
+}
+
+/* Ajuste para que se vea bien en móviles */
+@media (max-width: 576px) {
+  .separator-container .icon-wrapper {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    margin: 0 15px;
+  }
+}
+
+/* ---------------- TITULOS ---------------- */
+h2 {
+  position: relative;
+  display: inline-block;
+}
+/* h2::after {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 2px;
+  background: #0d6efd;
+  margin: 8px auto 0;
+} */
+
+
+/*----------- Contenedor de la tarjeta -------------- */
+.service-card {
+  position: relative;
+  margin-top: 40px; /* Espacio para que el icono no choque arriba */
+  background: white;
+  border-radius: 20px;
+  padding: 60px 20px 30px; /* Mucho padding superior por el icono */
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra suave */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+/*----------- Círculo del icono traslapado -------------*/
+.service-icon-container {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #10253d; /* Azul marino de la firma */
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #f8f9fa; /* Color de fondo de la sección */
+}
+
+.service-icon-container img {
+  width: 80px;
+  height: 70px;
+  object-fit: contain;
+}
+
+/* ---------- Textos --------- */
+.service-title {
+  color: #10253d;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.service-text {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* --------- Contenedor principal del carousel de servicios ---------- */
+#servicesCarousel {
+  padding: 0 60px; /* Crea un "colchón" lateral para que las flechas tengan espacio */
+  position: relative;
+}
+
+/* Ajuste de los botones laterales */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 40px; /* Hace el área de clic más delgada para que no estorbe */
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+/* Mueve la flecha izquierda más afuera */
+.carousel-control-prev {
+  left: -10px;
+}
+
+/* Mueve la flecha derecha más afuera */
+.carousel-control-next {
+  right: -10px;
+}
+
+/* Si quieres que las flechas sean más grandes y visibles */
+.dark-icon {
+  filter: invert(1) grayscale(100%) brightness(0);
+  width: 40px;
+  height: 40px;
+}
+
+/* ------------ Contenedor del texto extra ------------*/
+.extra-info {
+    margin-top: 15px;
+    text-align: left; /* O center, según prefieras */
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* Para que la tarjeta crezca suavemente */
+.service-card {
+    height: auto; /* Cambia height: 100% por auto si tenías altura fija */
+    min-height: 350px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animación opcional (si quieres que aparezca suave) */
+.animate__fadeIn {
+    animation: fadeIn 0.5s;
+}
+
+/* --------- Botón "Ver más"  ---------*/
+.btn-ver-mas {
+  background-color: #10253d;
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: none;
+  margin-top: 15px;
+}
+
+.btn-ver-mas:hover {
+  background-color: #162a47;
+  color: white;
+}
+
+/* Flechas del Carousel (Oscuras) */
+.dark-icon {
+  filter: invert(1) grayscale(100%) brightness(0); /* Hace que las flechas de Bootstrap sean negras */
+}
+
+.custom-control {
+  width: 5%; /* Ajusta para que no tapen las tarjetas */
+}
+
+
+/**------------------seccion cursos--------------------- */
+/* Sección de Cursos */
+.curso-container {
+  background-color: #10253d; /* El azul marino de la firma */
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.curso-container .badge {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.0rem;
+}
+
+/* Botón Flotante */
+.floating-course-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 0;
+  z-index: 1050;
+  background-color: #10253d;
+  color: white;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  padding: 10px 15px;
+
+  /* Animación de entrada suave */
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.5s ease-in-out;
+  pointer-events: none; /* No clickable si es invisible */
+}
+
+/* Clase que se activa con el scroll del TS */
+.floating-course-btn.visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.floating-course-btn:hover {
+  transform: translateX(-10px);
+}
+
+.floating-course-btn .btn-icon {
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  margin-top: 7px;
+}
+
+
+
+.floating-course-btn .btn-icon img {
+  width: 50px;
+  filter: invert(1) brightness(2);
+}
+
+.floating-course-btn .btn-title {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.floating-course-btn .btn-subtitle {
+  display: block;
+  font-size: 0.7rem;
+  margin-bottom: 5px;
+}
+
+.floating-course-btn .btn-action {
+  background: white;
+  color: #10253d;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 2px 15px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+
+/* ---------- Estilos del Proceso de Demanda --- */
+
+/* --- Estilos Profesionales para el Proceso de Demanda --- */
+
+/* Color oficial de la firma */
+.text-navy {
+  color: #10253d;
+}
+
+/* Contenedor principal Flex */
+.proceso-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Espaciado para cada ítem en desktop */
+@media (min-width: 768px) {
+  .proceso-item {
+    width: calc(100% / 6); /* Un sexto del ancho */
+    margin-bottom: 0;
+  }
+}
+
+/* --- Los Círculos --- */
+.circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-circle {
+  width: 110px; /* Tamaño del círculo de referencia */
+  height: 110px;
+  background-color: white;
+  border-radius: 50%;
+  border: 3px solid #e9ecef; /* Gris muy claro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 2; /* Por encima de la línea */
+}
+
+/* Efecto al pasar el mouse por la tarjeta */
+.proceso-item:hover .icon-circle {
+  border-color: #f7b217; /* El amarillo de los números */
+  transform: scale(1.05);
+}
+
+/* --- Los Números Flotantes Amarillos --- */
+.step-number {
+  position: absolute;
+  top: -10px; /* Sube el número */
+  right: 15px; /* Lo desplaza a la derecha */
+  background-color: #f7b217; /* El amarillo corporativo */
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* --- Las Líneas Conectoras Estilo "Eslabón" --- */
+/* Solo en pantallas grandes */
+@media (min-width: 768px) {
+  /* No aplicamos en el último elemento (isLast) */
+  .proceso-item:not(:last-child) .circle-container::after {
+    content: '';
+    position: absolute;
+    top: 55px; /* Mitad del círculo de 110px */
+    left: 100%; /* Empieza donde termina el círculo actual */
+    width: 80%; /* Longitud del segmento conector */
+    height: 3px; /* Grosor */
+    background-color: #e9ecef; /* Mismo gris del borde */
+    z-index: 1; /* Por debajo de los círculos */
+  }
+}
+
+/* --- Estilo de Textos --- */
+.step-title {
+  color: #10253d; /* Azul marino */
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.step-desc {
+  line-height: 1.4;
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+/* --- Botón Negro Final --- */
+.btn-contacto-proceso {
+  background-color: #10253d;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 8px 30px;
+  border-radius: 10px;
+  border: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-contacto-proceso:hover {
+  background-color: #0c1c2e;
+  transform: translateY(-2px);
+}
+
+/** --------------------------------------------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+  /* ... tus otros estilos ... */
+
+  .stat-row-container {
+    justify-content: flex-start;
+    margin-left: 0;
+    transform: scale(0.9); /* Un poco más pequeño en móvil */
+  }
+
+  .stat-label-text {
+    font-size: 0.85rem;
+    margin-left: 35px;
+  }
+}
+
+/** ---------------Footer----------------------- */
+/* --- Línea Estética de Transición --- */
+.divider-section {
+  background-color: #081624; /* Color de fondo de la sección de arriba (ajusta si es necesario) */
+  padding: 0;
+  margin: 0;
+  height: 30px; /* Espacio antes del footer */
+  display: flex;
+  align-items: flex-end;
+}
+
+.white-line {
+  width: 100%;
+  height: 4px; /* Grosor de la línea blanca */
+  background-color: #ffffff;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.05); /* Sombra muy sutil */
+}
+
+.footer-legal {
+  background-color: #081624;
+  /* Quitamos el border-top anterior para que luzca la línea blanca */
+  border-top: none;
+}
+/* --- Nuevo Footer Pulido: Consultores 1509 --- */
+
+/* Contenedor principal del footer */
+.footer-legal {
+  background-color: #081624; /* El azul marino más oscuro */
+  color: white;
+  /* Aumentamos dramáticamente el espacio arriba y abajo para que respire */
+  padding-top: 100px;
+  padding-bottom: 80px;
+  border-top: 4px solid #ffffff; /* Reestablecemos la línea blanca estética */
+  font-family: 'Poppins', sans-serif; /* O la fuente que uses, para más elegancia */
+}
+
+/* Títulos: Contacts y Follow Us */
+.footer-legal h4 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  margin-bottom: 25px; /* Más espacio debajo del título */
+}
+
+/* Links de contacto y redes sociales */
+.contact-link, .social-icon {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Espacio entre icono y texto */
+  margin-bottom: 15px; /* Separación entre cada link */
+  font-size: 1rem;
+}
+
+.contact-link:hover, .social-icon:hover {
+  color: #f7b217; /* Toque dorado corporativo en hover */
+  transform: translateX(3px); /* Pequeño movimiento sutil */
+}
+
+/* El bloque Follow Us */
+.follow-us-block {
+  margin-top: 40px; /* Separación del bloque de contactos */
+}
+
+.social-icons-wrapper {
+  display: flex;
+  gap: 20px;
+  font-size: 1.3rem; /* Iconos un poco más grandes */
+}
+
+/* --- Ajuste Crítico del Logotipo Central --- */
+.footer-logo-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo {
+  max-width: 280px; /* Aumentamos el tamaño máximo para que se note */
+  height: auto;
+  margin-bottom: 15px;
+  /* El secreto para la nitidez: Un filtro de brillo y contraste suave */
+  filter: brightness(1.1) contrast(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.logo-tagline {
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 5px; /* Espaciado muy ancho entre letras, como en la referencia */
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+/* Columna Derecha: Dirección y Copyright */
+.address-block {
+  text-align: right;
+  line-height: 1.8;
+  font-size: 0.9rem;
+  margin-bottom: 50px; /* Mucho espacio antes del copyright */
+}
+
+.copyright-block {
+  text-align: right;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+/**----------------------------------------------- */
+/* Responsividad para móviles */
+@media (max-width: 767px) {
+  .footer-legal {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .footer-legal h4, .contact-link, .address-block, .copyright-block {
+    text-align: center !important;
+    justify-content: center;
+  }
+
+  .address-block {
+    margin-top: 30px;
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .footer-legal {
+    text-align: center;
+  }
+  .text-md-end {
+    text-align: center !important;
+  }
+  .footer-logo {
+    margin: 20px 0;
+  }
+}
