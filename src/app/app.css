@@ -4,10 +4,28 @@
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(7px);
   border-radius: 0 0 20px 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-default);
   padding: 0.5rem 2.5rem;
-  opacity: 0.9;
-  transition: width 0.3s ease;
+  transition: var(--transition-default);
+}
+
+.navbar-scrolled {
+  padding: 0.2rem 2.5rem;
+  background-color: #01202cf2;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+body {
+  padding-top: 0;
+}
+
+section {
+  scroll-margin-top: 100px; /* Ajustado para el navbar */
+}
+
+/* Mejorar visibilidad del carrusel de servicios */
+#servicesCarousel .carousel-item {
+  transition: transform 0.6s ease-in-out;
 }
 
 .navbar-brand img {
@@ -32,16 +50,20 @@
   color: #ffc107;
 }
 
-/* ---------------- CAROUSEL ---------------- */
+/* ============================================
+   3. CARRUSEL PRINCIPAL
+   ============================================ */
 #mainCarousel {
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: var(--shadow-default);
 }
+
 #mainCarousel .carousel-item img {
   height: 710px;
   object-fit: cover;
 }
+
 .carousel-indicators [data-bs-target] {
   width: 16px;
   height: 16px;
@@ -56,55 +78,67 @@
   border-color: #ffffffe7;
 }
 
-/* ---------------- SCROLLSPY ---------------- */
-.scrollspy-example {
-  scroll-behavior: smooth; /* Para que el scroll al hacer clic sea suave */
+/* ============================================
+   4. SECCIONES Y SCROLLSPY
+   ============================================ */
+html {
+  scroll-padding-top: 180px;
+  scroll-behavior: smooth;
 }
 
-.counter {
-  transition: transform 0.3s ease;
+section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+  scroll-margin-top: 180px;
 }
 
-.card:hover .counter {
-  transform: scale(1.1);
-  color: #007bff; /* O el color principal de tu marca */
+section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* ============================================================
-   3. QUIÉNES SOMOS (DESCRIPCIÓN & BOTÓN)
-   ============================================================ */
-
-/* Aseguramos que use la fuente Montserrat si está cargada */
+/* ============================================
+   5. QUIÉNES SOMOS
+   ============================================ */
 .description-area {
   font-family: 'Montserrat', sans-serif;
-  text-align: left; /* Alineación a la izquierda */
+  text-align: left;
 }
 
-/* Título Principal (CONSULTORES 1509) */
 .brand-title {
-  color: #01202c; /* El color oscuro de tu marca/navbar */
-  letter-spacing: -1px; /* Unir un poco las letras para fuerza visual */
+  color: var(--color-primary);
+  letter-spacing: -1px;
+  font-size: 1.8rem;
 }
 
-/* Subtítulo */
 .brand-subtitle {
   letter-spacing: 0.5px;
+  color: var(--color-primary);
+  font-style: italic;
 }
 
-/* Párrafos de texto */
 .description-area p {
   font-size: 1rem;
-  line-height: 1.7; /* Mejor interlineado para lectura */
+  line-height: 1.7;
+  text-align: justify;
 }
 
-/* Botón Sólido y Oscuro (como en la imagen) */
 .btn-brand-dark {
-  background-color: #01202c; /* Fondo oscuro */
-  color: #ffffff; /* Texto blanco */
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
-  border-radius: 30px; /* Esquinas muy redondeadas */
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 30px;
+  transition: var(--transition-default);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 0.8rem;
+}
+
+.btn-brand-dark:hover {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
 
 .btn-brand-dark:hover {
@@ -149,8 +183,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ---------------- STATS ---------------- */
-/* ---------------- STATS (Diseño Cápsula) ---------------- */
+/* ============================================
+   6. STATS (Cápsulas)
+   ============================================ */
 .stats-area {
   background: transparent; /* Quitamos el fondo blanco cuadrado */
   padding: 10px;
@@ -334,16 +369,19 @@ h2 {
 } */
 
 
-/*----------- Contenedor de la tarjeta -------------- */
+/* ============================================
+   7. SERVICIOS (Tarjetas y Carrusel)
+   ============================================ */
 .service-card {
   position: relative;
-  margin-top: 40px; /* Espacio para que el icono no choque arriba */
+  margin-top: 40px;
   background: white;
   border-radius: 20px;
-  padding: 60px 20px 30px; /* Mucho padding superior por el icono */
+  padding: 60px 20px 30px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra suave */
-  height: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  height: auto;
+  min-height: 350px;
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
@@ -353,20 +391,19 @@ h2 {
   transform: translateY(-5px);
 }
 
-/*----------- Círculo del icono traslapado -------------*/
 .service-icon-container {
   position: absolute;
   top: -35px;
   left: 50%;
   transform: translateX(-50%);
-  background: #10253d; /* Azul marino de la firma */
+  background: var(--color-secondary);
   width: 75px;
   height: 75px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 5px solid #f8f9fa; /* Color de fondo de la sección */
+  border: 5px solid #f8f9fa;
 }
 
 .service-icon-container img {
@@ -375,9 +412,8 @@ h2 {
   object-fit: contain;
 }
 
-/* ---------- Textos --------- */
 .service-title {
-  color: #10253d;
+  color: var(--color-secondary);
   font-weight: 800;
   text-transform: uppercase;
   font-size: 1.1rem;
@@ -390,18 +426,45 @@ h2 {
   line-height: 1.4;
 }
 
-/* --------- Contenedor principal del carousel de servicios ---------- */
+.btn-ver-mas {
+  background-color: var(--color-secondary);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: none;
+  margin-top: 15px;
+}
+
+.btn-ver-mas:hover {
+  background-color: #162a47;
+  color: white;
+}
+
+/* Carrusel de servicios */
 #servicesCarousel {
-  padding: 0 60px; /* Crea un "colchón" lateral para que las flechas tengan espacio */
+  padding: 0 60px;
   position: relative;
 }
 
-/* Ajuste de los botones laterales */
+#servicesCarousel .carousel-item {
+  transition: transform 0.6s ease-in-out;
+}
+
 .carousel-control-prev,
 .carousel-control-next {
-  width: 40px; /* Hace el área de clic más delgada para que no estorbe */
+  width: 40px;
   opacity: 0.8;
   transition: opacity 0.3s;
+}
+
+.carousel-control-prev {
+  left: -10px;
+}
+
+.carousel-control-next {
+  right: -10px;
 }
 
 .carousel-control-prev:hover,
@@ -409,17 +472,6 @@ h2 {
   opacity: 1;
 }
 
-/* Mueve la flecha izquierda más afuera */
-.carousel-control-prev {
-  left: -10px;
-}
-
-/* Mueve la flecha derecha más afuera */
-.carousel-control-next {
-  right: -10px;
-}
-
-/* Si quieres que las flechas sean más grandes y visibles */
 .dark-icon {
   filter: invert(1) grayscale(100%) brightness(0);
   width: 40px;
@@ -473,8 +525,9 @@ h2 {
 }
 
 
-/**------------------seccion cursos--------------------- */
-/* Sección de Cursos */
+/* ============================================
+   8. CURSOS
+   ============================================ */
 .curso-container {
   background-color: #10253d; /* El azul marino de la firma */
   border-radius: 40px;
@@ -564,9 +617,9 @@ h2 {
 }
 
 
-/* ---------- Estilos del Proceso de Demanda --- */
-
-/* --- Estilos Profesionales para el Proceso de Demanda --- */
+/* ============================================
+   9. PROCESO DE DEMANDA
+   ============================================ */
 
 /* Color oficial de la firma */
 .text-navy {
@@ -841,3 +894,649 @@ h2 {
     margin: 20px 0;
   }
 }
+
+/* ============================================
+   11. CHATBOT
+   ============================================ */
+/* Botón flotante del chatbot (izquierda) */
+.chatbot-float-btn {
+  position: fixed;
+  bottom: 100px;        /* Misma posición vertical que el botón de cursos */
+  left: 0;              /* ← En LUGAR de right: 0, ahora a la IZQUIERDA */
+  z-index: 1050;
+  background-color: #10253d;  /* Mismo color que el botón de cursos */
+  color: white;
+  border-top-right-radius: 50px;    /* ← Cambiado: esquinas derechas redondeadas */
+  border-bottom-right-radius: 50px; /* ← Cambiado: esquinas derechas redondeadas */
+  border-top-left-radius: 0;        /* ← Esquina izquierda recta */
+  border-bottom-left-radius: 0;     /* ← Esquina izquierda recta */
+  padding: 10px 15px;
+
+  /* Animación de entrada suave - desde la izquierda */
+  opacity: 0;
+  transform: translateX(-100%);  /* ← Cambiado: viene desde la izquierda */
+  transition: all 0.5s ease-in-out;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Clase que se activa con el scroll (opcional, puedes quitarla si quieres siempre visible) */
+.chatbot-float-btn.visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Si quieres que siempre esté visible (sin animación de scroll) */
+.chatbot-float-btn {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Efecto hover - se desliza hacia la izquierda (similar al de cursos) */
+.chatbot-float-btn:hover {
+  transform: translateX(-10px);  /* Se mueve más a la izquierda al hacer hover */
+}
+
+/* Icono circular dentro del botón - MISMO ESTILO */
+.chatbot-float-btn .chatbot-icon {
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.chatbot-float-btn .chatbot-icon i {
+  font-size: 28px;
+  color: #10253d;
+}
+
+/* Contenido de texto del botón */
+.chatbot-float-btn .chatbot-content {
+  text-align: center;
+}
+
+.chatbot-float-btn .chatbot-title {
+  display: block;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.chatbot-float-btn .chatbot-subtitle {
+  display: block;
+  font-size: 0.65rem;
+  margin-bottom: 5px;
+  opacity: 0.9;
+}
+
+/* Cuando el chat está abierto, el texto se reduce */
+.chatbot-float-btn.chat-open .chatbot-title {
+  font-size: 0.8rem;
+}
+
+.chatbot-float-btn.chat-open .chatbot-subtitle {
+  display: none;  /* Oculta el subtítulo para ahorrar espacio */
+}
+
+.chatbot-float-btn.chat-open .chatbot-icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Opción 4: Casi invisible (200px) */
+.chatbot-float-btn.chat-open {
+  transform: translateX(-200px);
+  opacity: 0.6;
+}
+
+.chatbot-float-btn .chatbot-status {
+  background: #2ecc71;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* Pulso de atención (opcional, igual que el de cursos pero puedes quitarlo) */
+.chatbot-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(16, 37, 61, 0.4);
+  animation: pulseChatbot 1.5s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseChatbot {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ==================== VENTANA DEL CHATBOT ==================== */
+.chatbot-window {
+  position: fixed;
+  bottom: 180px;
+  left: 20px;           /* ← Posicionado a la izquierda (cambié right por left) */
+  width: 380px;
+  height: 550px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0);
+  opacity: 0;
+  transform-origin: bottom left;  /* ← Cambiado: animación desde izquierda */
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 1049;
+}
+
+.chatbot-window.open {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Header del chatbot - MISMO COLOR que el botón de cursos */
+.chatbot-header {
+  background: linear-gradient(135deg, #10253d 0%, #1a4a5c 100%);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ffcf33;
+}
+
+.chatbot-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chatbot-avatar {
+  width: 45px;
+  height: 45px;
+  background: #ffcf33;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #10253d;
+}
+
+.chatbot-header-text h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.chatbot-header-text p {
+  margin: 0;
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+.chatbot-close {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.chatbot-close:hover {
+  background: rgba(255,255,255,0.3);
+  transform: rotate(90deg);
+}
+
+/* Área de mensajes */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Mensajes */
+.message-wrapper {
+  display: flex;
+  gap: 10px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-wrapper.user-message {
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.user-message .message-avatar {
+  background: #10253d;
+  color: white;
+}
+
+.bot-message .message-avatar {
+  background: #ffcf33;
+  color: #10253d;
+}
+
+.message-content {
+  max-width: 70%;
+  flex: 1;
+}
+
+.user-message .message-content {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.message-bubble {
+  background: white;
+  padding: 10px 14px;
+  border-radius: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.user-message .message-bubble {
+  background: #10253d;
+  color: white;
+}
+
+.message-text {
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.message-time {
+  font-size: 10px;
+  margin-top: 5px;
+  opacity: 0.6;
+  text-align: right;
+}
+
+/* Paquetes en el chat */
+.paquetes-container {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.paquete-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 1px solid #e9ecef;
+}
+
+.paquete-card:hover {
+  transform: translateX(5px);
+  border-color: #ffcf33;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.paquete-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.paquete-card h5 {
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.paquete-card p {
+  font-size: 11px;
+  margin: 0 0 8px 0;
+  color: #6c757d;
+}
+
+.paquete-precio {
+  font-size: 14px;
+  font-weight: bold;
+  color: #10253d;
+  margin: 5px 0;
+}
+
+.paquete-duracion {
+  font-size: 10px;
+  color: #6c757d;
+  margin-bottom: 8px;
+}
+
+.btn-paquete {
+  width: 100%;
+  background: #10253d;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 8px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-paquete:hover {
+  background: #ffcf33;
+  color: #10253d;
+}
+
+/* Servicios en el chat */
+.servicios-chat {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.servicio-chat-item {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 1px solid #e9ecef;
+}
+
+.servicio-chat-item:hover {
+  background: #f8f9fa;
+  transform: translateX(5px);
+}
+
+.servicio-chat-item i:first-child {
+  font-size: 18px;
+  color: #10253d;
+}
+
+.servicio-chat-item div {
+  flex: 1;
+}
+
+.servicio-chat-item strong {
+  display: block;
+  font-size: 12px;
+}
+
+.servicio-chat-item small {
+  font-size: 10px;
+  color: #6c757d;
+}
+
+/* Indicador de escritura */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 15px;
+  width: fit-content;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.typing-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10253d;
+  animation: typing 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-8px);
+  }
+}
+
+.typing-text {
+  font-size: 11px;
+  color: #6c757d;
+}
+
+/* Input del chatbot */
+.chatbot-input {
+  padding: 12px;
+  background: white;
+  border-top: 1px solid #e9ecef;
+}
+
+.input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 25px;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.chat-input:focus {
+  border-color: #10253d;
+}
+
+.send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #10253d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.send-btn:hover:not(:disabled) {
+  background: #ffcf33;
+  transform: scale(1.1);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Acciones rápidas */
+.chatbot-quick-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.quick-action-btn {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #10253d;
+}
+
+.quick-action-btn:hover {
+  background: #10253d;
+  color: white;
+  border-color: #10253d;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .chatbot-window {
+    width: calc(100vw - 40px);
+    height: calc(100vh - 120px);
+    bottom: 100px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .chatbot-float-btn {
+    bottom: 80px;
+    padding: 8px 12px;
+  }
+
+  .chatbot-float-btn .chatbot-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .chatbot-float-btn .chatbot-icon i {
+    font-size: 22px;
+  }
+
+  .chatbot-title {
+    font-size: 0.85rem;
+  }
+
+  .chatbot-subtitle {
+    font-size: 0.55rem;
+  }
+}
+
+/* Opciones clickeables del chat */
+.opciones-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.opcion-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.opcion-btn:hover {
+  background: #10253d;
+  border-color: #ffcf33;
+  transform: translateX(5px);
+}
+
+.opcion-btn:hover .opcion-texto {
+  color: white;
+}
+
+.opcion-icono {
+  font-size: 24px;
+}
+
+.opcion-numero {
+  background: #10253d;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.opcion-btn:hover .opcion-numero {
+  background: #ffcf33;
+  color: #10253d;
+}
+
+.opcion-texto {
+  flex: 1;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.opcion-btn i {
+  color: #10253d;
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+.opcion-btn:hover i {
+  opacity: 1;
+  transform: translateX(3px);
+  color: #ffcf33;
+}
+
+
