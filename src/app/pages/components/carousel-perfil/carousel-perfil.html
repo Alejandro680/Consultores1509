@@ -1,0 +1,42 @@
+<div class="carrusel-wrapper">
+
+  <button class="carrusel-btn prev" (click)="anterior()">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+
+  <div class="carrusel-slides">
+    @for (slide of slides; track $index; let i = $index) {
+      <div class="carrusel-slide" [class.active]="i === slideActual">
+        <div class="tarjetas-grid">
+          @for (perfil of slide; track perfil.id) {
+            <div class="tarjeta-perfil" (click)="seleccionarPerfil(perfil)">
+              <div class="tarjeta-imagen">
+                <img [src]="perfil.imagen" [alt]="perfil.nombre">
+              </div>
+              <div class="tarjeta-info">
+                <h3>{{ perfil.nombre }}</h3>
+                <p class="tarjeta-cargo">{{ perfil.cargo }}</p>
+                <p class="tarjeta-descripcion">{{ perfil.descripcionCorta }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <button class="carrusel-btn next" (click)="siguiente()">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+
+</div>
+
+<div class="carrusel-indicadores">
+  @for (slide of slides; track $index; let i = $index) {
+    <button
+      class="indicador"
+      [class.active]="i === slideActual"
+      (click)="irAlSlide(i)">
+    </button>
+  }
+</div>

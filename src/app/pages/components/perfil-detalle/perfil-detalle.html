@@ -1,0 +1,60 @@
+@if (perfilSeleccionado) {
+  <div class="banner-container" @slideInUp>
+
+    <!-- Botón cerrar -->
+    <button class="btn-cerrar" (click)="cerrarDetalle()">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <!-- Franja superior azul marino oscuro -->
+    <div class="main-banner">
+      <div class="content-wrapper">
+
+        <!-- Cuadro de la fotografía con borde blanco grueso -->
+        <div class="photo-container">
+          <img [src]="perfilSeleccionado.imagen" [alt]="perfilSeleccionado.nombre" class="profile-photo">
+        </div>
+
+        <!-- Bloque de textos -->
+        <div class="info-container">
+          <h1 class="name">{{ perfilSeleccionado.nombre }}</h1>
+          <h2 class="title">{{ perfilSeleccionado.cargo }}</h2>
+
+          <p class="education">
+            {{ perfilSeleccionado.descripcionCorta }}
+          </p>
+
+          <p class="description">
+            <strong>Certificada por parte de la Comisión Nacional Bancaria y de Valores con número de Oficio:</strong><br>
+            {{ perfilSeleccionado.descripcionCompleta }}
+          </p>
+
+          <!-- Fila de iconos -->
+          <div class="icons-container">
+            <div class="icon-item">
+              <i class="fas fa-gavel"></i>
+              <span>Legal</span>
+            </div>
+            <div class="icon-item">
+              <i class="fas fa-balance-scale"></i>
+              <span>Justicia</span>
+            </div>
+            <div class="icon-item">
+              <i class="fas fa-handshake"></i>
+              <span>Confianza</span>
+            </div>
+            <div class="icon-item">
+              <i class="fas fa-certificate"></i>
+              <span>Certificada</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Franja inferior dorada con degradado -->
+    <div class="gold-bar"></div>
+
+  </div>
+}
