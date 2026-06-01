@@ -1,0 +1,203 @@
+<div data-bs-spy="scroll" data-bs-target="#navbar-example" data-bs-offset="100">
+  <!-- CONTENIDO PRINCIPAL -->
+  <div>
+    <!-- Carousel debajo del nav -->
+    <div id="mainCarousel" class="carousel slide mt-6 pt-6" data-bs-ride="carousel">
+      <!-- indicadores dinámicos -->
+      <div class="carousel-indicators">
+        @for (slide of slides; track $index; let i = $index) {
+          <button
+           title="button"
+           type="button"
+           data-bs-target="#mainCarousel"
+           [attr.data-bs-slide-to]="i"
+           [class.active]="i === 0"
+           [attr.aria-current]="i === 0 ? 'true' : null"
+           [attr.aria-label]="'Slide ' + (i + 1)">
+          </button>
+        }
+      </div>
+
+      <!-- items -->
+      <div class="carousel-inner">
+        @for (slide of slides; track $index; let i = $index) {
+          <div class="carousel-item" [class.active]="i === 0">
+            <img [src]="slide.src" class="d-block w-100" [alt]="slide.caption">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>{{ slide.caption }}</h5>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev" aria-label="Anterior">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next" aria-label="Siguiente">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Secciones scrollspy -->
+  <div id="spyNav" class="scrollspy-example mt-5 pt-5">
+    @for (item of items; track item.id) {
+      <section [id]="item.id" class="container my-5">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold">{{ item.label }}</h2>
+        </div>
+
+
+        @if (item.type === 'quienes') {
+          <div class="row align-items-center position-relative">
+            <div class="col-md-5 description-area pe-md-5">
+              <h1 class="display-5 fw-bold text-uppercase brand-title mb-1">{{ item.content?.title }}</h1>
+              <h3 class="h6 fw-bold fst-italic brand-subtitle mb-4">"{{ item.content?.subtitle }}"</h3>
+              <p class="small text-muted mb-3">{{ item.content?.description1 }}</p>
+              <p class="small text-muted mb-4">{{ item.content?.description2 }}</p>
+              <button class="btn btn-brand-dark px-4 py-2 text-uppercase fw-bold" (click)="irASobreNosotros()">{{ item.content?.button }}</button>
+            </div>
+
+            <div class="col-md-2 d-none d-md-flex justify-content-center align-items-center position-relative vertical-divider-container">
+              <div class="vertical-line"></div>
+              <div class="balanza-icon">
+                <img src="balanza.png" alt="Icono Balanza" style="width: 175px; height: auto;">
+              </div>
+              <div class="vertical-line"></div>
+            </div>
+
+            <div class="col-md-5 ps-md-5">
+              <div class="d-flex flex-column gap-3">
+                @for (stat of item.stats; track $index) {
+                  <div class="stat-row-container">
+                    <div class="stat-puck">
+                      <span class="plus-sign">+</span>
+                      <span class="counter" [attr.data-target]="stat.value">0</span>
+                      <div class="stat-icon-circle">
+                        <img [src]="stat.icon" [alt]="stat.label" class="img-icon-stat" />
+                      </div>
+                    </div>
+                    <div class="stat-label-text">{{ stat.label }}</div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+
+        @else if (item.type === 'servicios') {
+          <!-- Carrusel de servicios SIN auto-desplazamiento -->
+          <div id="servicesCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+              @for (grupo of serviciosAgrupados; track $index; let isFirst = $first) {
+                <div class="carousel-item" [class.active]="isFirst">
+                  <div class="row g-4 justify-content-center pt-5">
+                    @for (servicio of grupo; track servicio.title) {
+                      <div class="col-md-4 d-flex">
+                        <div class="service-card d-flex flex-column w-100">
+                          <div class="service-icon-container">
+                            <img [src]="servicio.icon" [alt]="servicio.title">
+                          </div>
+                          <div class="service-card-body d-flex flex-column flex-grow-1">
+                            <h4 class="service-title">{{ servicio.title }}</h4>
+                            <p class="service-text">{{ servicio.desc }}</p>
+                            <button class="btn btn-ver-mas mt-auto align-self-center" (click)="navegarAServicio(servicio)">
+                              VER MÁS
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev" aria-label="Anterior">
+              <span class="carousel-control-prev-icon dark-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next" aria-label="Siguiente">
+              <span class="carousel-control-next-icon dark-icon"></span>
+            </button>
+          </div>
+        }
+
+        @else if (item.id === 'cursos') {
+          <div class="curso-container p-4 p-md-5 mb-5 animate__animated animate__fadeIn">
+            <div class="row align-items-center">
+              <div class="col-lg-6 text-white pe-lg-5">
+                <div class="d-flex align-items-center mb-4">
+                  <img src="assets/ICONO 4-01.png" alt="Icono" class="me-3" style="width: 60px;">
+                  <div>
+                    <h2 class="fw-bold mb-0">CURSO PLD</h2>
+                    <p class="mb-0">PRESENCIAL Y VIA ZOOM</p>
+                  </div>
+                </div>
+                <ul class="list-unstyled">
+                  <li class="mb-4">
+                    <h4 class="fw-bold"><span class="badge rounded-circle bg-white text-dark me-2">1</span> PRIMER CURSO</h4>
+                    <p class="small fst-italic opacity-75 ms-5">QUE ES LA PREVENCIÓN DEL LAVADO DE DINERO<br>5 CLASES VIA ZOOM 2 HRS C/U</p>
+                  </li>
+                  <li class="mb-4">
+                    <h4 class="fw-bold"><span class="badge rounded-circle bg-white text-dark me-2">2</span> SEGUNDO CURSO</h4>
+                    <p class="small fst-italic opacity-75 ms-5">QUE ES LA PREVENCIÓN DEL LAVADO DE DINERO<br>5 CLASES VIA ZOOM 2 HRS C/U</p>
+                  </li>
+                  <li class="mb-0">
+                    <h4 class="fw-bold"><span class="badge rounded-circle bg-white text-dark me-2">3</span> TERCER CURSO</h4>
+                    <p class="small fst-italic opacity-75 ms-5">QUE ES LA PREVENCIÓN DEL LAVADO DE DINERO<br>5 CLASES VIA ZOOM 2 HRS C/U</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="video-placeholder shadow-lg">
+                  <img src="assets/placeholder-video.png" class="img-fluid rounded" alt="Video curso">
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
+        @else if (item.type === 'proceso') {
+          <div class="row mb-5 py-5">
+            <div class="col-12">
+              <div class="proceso-wrapper d-flex flex-column flex-md-row justify-content-center align-items-start">
+                @for (paso of item.pasos; track paso.number; let isLast = $last) {
+                  <div class="proceso-item text-center animate__animated animate__fadeInUp"
+                      [style.animation-delay]="(paso.number * 100) + 'ms'">
+                    <div class="circle-container position-relative mb-4">
+                      <span class="step-number shadow-sm">{{ paso.number }}</span>
+                      <div class="icon-circle shadow-sm">
+                        <i [class]="paso.icon" class="fa-2x text-navy"></i>
+                      </div>
+                    </div>
+                    <h5 class="fw-bold text-uppercase mb-2 step-title">{{ paso.title }}</h5>
+                    <p class="small text-muted mb-0 step-desc px-3">{{ paso.desc }}</p>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-12 text-center">
+              <button class="btn-contacto-proceso shadow-sm">{{ item.content?.button }}</button>
+            </div>
+          </div>
+        }
+      </section>
+    }
+  </div>
+
+  <!-- Botón flotante de cursos -->
+  <div class="floating-course-btn shadow-lg d-none d-md-flex" [class.visible]="showFloatingBtn">
+    <div class="btn-icon">
+      <img src="assets/ICONO 4-01.png" alt="Icono PLD">
+    </div>
+    <div class="btn-content text-center">
+      <span class="btn-title">CURSO PLD</span>
+      <span class="btn-subtitle">PRESENCIAL Y VIA ZOOM</span>
+      <a href="#cursos" class="btn-action" (click)="scrollToCursos($event)">CLICK AQUÍ</a>
+    </div>
+  </div>
+
+</div>
