@@ -1,0 +1,91 @@
+<div class="ser-consultor-container">
+
+  <div class="encabezado-servicios">
+    <h1>NUESTROS SERVICIOS</h1>
+    <p>“Conocimiento, experiencia y compromiso en cada solución jurídica”</p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- BARRA DE ICONOS SUPERIOR                   -->
+  <!-- ========================================== -->
+  <div class="barra-navegacion-iconos">
+    <div class="grupo-iconos-scroll">
+     @for (servicioItem of serviciosDB; track servicioItem.id) {
+  <div class="item-menu-bloque">
+    <button
+      class="circulo-icono-btn"
+      [class.activo]="servicioActual === servicioItem.id"
+      (click)="cambiarServicio(servicioItem.id)"
+      [attr.title]="servicioItem.titulo">
+
+      @if (servicioItem.iconoTipo === 'fontawesome') {
+        <i [class]="servicioItem.icono"></i>
+      }
+
+      <!-- Regresamos al uso directo de tu variable única -->
+      @if (servicioItem.iconoTipo === 'png') {
+        <img [src]="servicioItem.icono" [alt]="servicioItem.titulo" class="icono-imagen">
+      }
+
+    </button>
+    <span class="texto-menu-superior">{{ servicioItem.titulo }}</span>
+  </div>
+}
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- PANEL DE CONTENIDO INFERIOR                -->
+  <!-- ========================================== -->
+  <!-- ========================================== -->
+<!-- PANEL DE CONTENIDO INFERIOR                -->
+<!-- ========================================== -->
+<div class="panel-contenido-desplegable">
+
+  @if (servicio) {
+    <!-- La clase 'animate-fade' se encarga de ejecutar el desvanecimiento -->
+    <div class="layout-grid-servicio animate-fade">
+
+      <!-- LADO IZQUIERDO: Marco Blanco con Icono -->
+      <div class="contenedor-marco-blanco">
+        <div class="cuadro-linea-blanca">
+          @if (servicio.iconoTipo === 'fontawesome') {
+            <i [class]="servicio.icono" class="icono-dorado-grande"></i>
+          }
+          @if (servicio.iconoTipo === 'png') {
+            <div class="mascara-dorada-circulo">
+              <img [src]="servicio.icono" [alt]="servicio.titulo" class="icono-imagen-interior">
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- LADO DERECHO: Información del Servicio -->
+      <div class="contenedor-informacion-legal">
+        <h2 class="titulo-servicio-actual">{{ servicio.titulo }}</h2>
+
+        <div class="grid-subservicios-vinetas">
+          @for (sub of servicio.lista; track sub) {
+            <div class="vineta-item">
+              <span class="punto-dorado">•</span>
+              <span class="texto-subservicio">{{ sub }}</span>
+            </div>
+          }
+        </div>
+
+        <p class="descripcion-parrafo-italica">
+          {{ servicio.descripcion }}
+        </p>
+      </div>
+
+    </div>
+  }
+
+</div>
+
+  <!-- ========================================== -->
+  <!-- BORDE DORADO INFERIOR                      -->
+  <!-- ========================================== -->
+  <div class="linea-acento-dorado"></div>
+
+</div>
