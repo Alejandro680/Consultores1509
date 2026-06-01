@@ -1,0 +1,108 @@
+<div class="sobre-nosotros-container">
+
+  <!-- SECCIÓN 1: TEXTO + IMAGEN -->
+  <div class="seccion-texto-con-imagen">
+    <div class="columna-texto">
+      <h1 class="titulo-principal">CONSULTORES 1509</h1>
+      <p>Fundada en 2012, es una firma especializada que reúne la experiencia de consultores externos en materia legal, corporativa, contractual, societaria, mobiliaria y en Prevención de Lavado de Dinero, con enfoque en intermediarios financieros no bancarios y actividades vulnerables.</p>
+      <p>Nuestro equipo está integrado por profesionales con sólida formación técnica y amplia trayectoria, dedicados a brindar asesoría estratégica y soluciones jurídicas integrales a empresas de distintos sectores.</p>
+      <p>Mantenemos una actualización constante en las diversas leyes, a las que están afectas las corporaciones, por estas razones, el servicio que prestamos a nuestros clientes es con el fin de generar un valor agregado a sus empresas.</p>
+      <p>No nos presentamos, ni pensamos en nosotros, como un despacho grande por número de integrantes. Estamos convencidos, sin embargo, que somos una institución grande por la calidad de nuestros profesionales, en quienes los clientes pueden depositar su confianza para conducir con éxito y seriedad las operaciones que habrán de distinguirlos de sus competidores.</p>
+    </div>
+    <div class="columna-imagen">
+      <img src="lawyers.jpg" alt="Consultores 1509" class="imagen-ejemplo">
+    </div>
+  </div>
+
+  <!-- SEPARADOR -->
+  <div class="separador"></div>
+
+  <!-- ========================================== -->
+  <!-- DIAGRAMA DE VALORES - VERSIÓN RÁPIDA       -->
+  <!-- ========================================== -->
+
+  <!-- Título (solo visible cuando está expandido) -->
+  <div class="pildora-titulo-valores" [hidden]="!expanded">
+    <h2 class="titulo-diagrama">VALORES INSTITUCIONALES</h2>
+  </div>
+
+  <!-- Contenedor del diagrama -->
+  <div class="diagrama-interactivo" [class.agrupado]="!expanded">
+
+    <!-- VALORES SUPERIORES -->
+    <div class="valores-superiores" [class.visible]="expanded" [hidden]="!expanded">
+      @for (valor of valoresSuperiores; track valor.name) {
+        <div class="pildora ">
+          <div class="icono-pildora">
+            @if (valor.iconType === 'fontawesome') {
+              <i [class]="valor.icon"></i>
+            }
+            @if (valor.iconType === 'png') {
+              <img [src]="valor.icon" [alt]="valor.name" class="icono-png">
+            }
+          </div>
+          <div class="contenido-pildora">
+            <h3>{{ valor.name }}</h3>
+            <p>{{ valor.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- CÍRCULO CENTRAL (CLICKABLE) -->
+    <div class="centro-container" [class.expandido]="expanded">
+      <div class="circulo-central-grande" (click)="toggleExpand()" [class.clickable]="true">
+        <div class="circulo-interno-blanco">
+          <img src="logo3.png" alt="1509 CONSULTORES">
+        </div>
+      </div>
+    </div>
+
+    <!-- VALORES INFERIORES -->
+    <div class="valores-inferiores" [class.visible]="expanded" [hidden]="!expanded">
+      @for (valor of valoresInferiores; track valor.name) {
+        <div class="pildora">
+          <div class="icono-pildora">
+            @if (valor.iconType === 'fontawesome') {
+              <i [class]="valor.icon"></i>
+            }
+            @if (valor.iconType === 'png') {
+              <img [src]="valor.icon" [alt]="valor.name" class="icono-png">
+            }
+          </div>
+          <div class="contenido-pildora">
+            <h3>{{ valor.name }}</h3>
+            <p>{{ valor.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Mensaje cuando está agrupado -->
+    <div class="mensaje-agrupado" [hidden]="expanded">
+      <p>✨ Haz clic en el logo ✨</p>
+    </div>
+
+  </div>
+
+  <div class="equipo-container">
+
+  <h2 class="equipo-titulo">QUIENES SOMOS</h2>
+
+  <!-- SECCIÓN DE DETALLE (aparece cuando hay un perfil seleccionado) -->
+  @if (perfilSeleccionado) {
+    <app-perfil-detalle
+      [perfilSeleccionado]="perfilSeleccionado"
+      (cerrar)="cerrarDetalle()">
+    </app-perfil-detalle>
+  }
+
+  <!-- CARRUSEL DE PERFILES -->
+  <app-carousel-perfil
+    [perfiles]="perfiles"
+    (perfilSeleccionado)="onPerfilSeleccionado($event)">
+  </app-carousel-perfil>
+
+</div>
+
+</div>

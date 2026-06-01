@@ -1,0 +1,932 @@
+/* ============================================
+   1. CARRUSEL PRINCIPAL
+   ============================================ */
+#mainCarousel {
+  border-radius: 20px;
+  box-shadow: var(--shadow-default);
+  overflow: hidden;
+}
+
+#mainCarousel .carousel-item img {
+  height: 710px;
+  object-fit: cover;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #797979cb;
+  margin: 0 6px;
+  opacity: 1;
+}
+
+.carousel-indicators .active {
+  background-color: #ffffff;
+  border-color: #ffffffe7;
+}
+
+/* ============================================
+   2. SECCIONES Y SCROLLSPY
+   ============================================ */
+html {
+  scroll-padding-top: 180px;
+  scroll-behavior: smooth;
+
+}
+
+section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+  scroll-margin-top: 180px;
+}
+
+section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-instant {
+  transition: opacity 0.4s ease-in !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ============================================
+   3. QUIÉNES SOMOS
+   ============================================ */
+.description-area {
+  font-family: 'Montserrat', sans-serif;
+  text-align: left;
+}
+
+.brand-title {
+  color: #01202c;
+  letter-spacing: -1px;
+  font-size: 1.8rem;
+}
+
+.brand-subtitle {
+  letter-spacing: 0.5px;
+  color: #01202c;
+  font-style: italic;
+}
+
+.description-area p {
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.btn-brand-dark {
+  background-color: #01202c;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-brand-dark:hover {
+  background-color: #ffcf33;
+  color: #01202c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.fs-7 {
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   4. STATS (Cápsulas)
+   ============================================ */
+.stats-area {
+  background: transparent;
+  padding: 10px;
+  box-shadow: none;
+}
+
+.stat-row-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.stat-puck {
+  background-color: #01202c;
+  color: #ffffff;
+  height: 55px;
+  min-width: 160px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.plus-sign {
+  font-size: 1.1rem;
+  margin-right: 4px;
+  color: #ffcf33;
+}
+
+.stat-icon-circle {
+  background-color: #ffffff;
+  color: #01202c;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 5px solid #01202c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: -31px;
+  z-index: 2;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon-circle i {
+  font-size: 1.5rem;
+}
+
+.stat-label-text {
+  margin-left: 45px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  color: #01202c;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.counter {
+  display: inline-block;
+}
+
+.img-icon-stat {
+  width: 80px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ============================================
+   5. SEPARADOR DE BALANZA
+   ============================================ */
+.separator-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 60px 0;
+  width: 100%;
+}
+
+.separator-container .line {
+  height: 2px;
+  flex-grow: 1;
+  background: linear-gradient(to right, transparent, #d4af37, transparent);
+  opacity: 0.6;
+}
+
+.vertical-divider-container {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+}
+
+.vertical-line {
+  width: 2px;
+  background-color: #01202c;
+  flex-grow: 1;
+  opacity: 0.3;
+}
+
+/* ============================================
+   6. SERVICIOS (Tarjetas y Carrusel)
+   ============================================ */
+#servicesCarousel {
+  padding: 0 60px;
+  position: relative;
+}
+
+#servicesCarousel .carousel-item {
+  transition: transform 0.6s ease-in-out;
+}
+
+.service-card {
+  position: relative;
+  margin-top: 40px;
+  background: white;
+  border-radius: 20px;
+  padding: 60px 20px 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  height: auto;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-icon-container {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #10253d;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #f8f9fa;
+}
+
+.service-icon-container img {
+  width: 80px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.service-title {
+  color: #10253d;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.service-text {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.btn-ver-mas {
+  background-color: #10253d;
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: none;
+  margin-top: 15px;
+}
+
+.btn-ver-mas:hover {
+  background-color: #162a47;
+  color: white;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 40px;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.carousel-control-prev {
+  left: -10px;
+}
+
+.carousel-control-next {
+  right: -10px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+.dark-icon {
+  filter: invert(1) grayscale(100%) brightness(0);
+  width: 40px;
+  height: 40px;
+}
+
+.extra-info {
+  margin-top: 15px;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.custom-control {
+  width: 5%;
+}
+
+/* ==========================================================================
+   AJUSTE DE CARRUSEL DE SERVICIOS PARA PANTALLAS CHICAS (MÓVILES)
+   ========================================================================== */
+@media (max-width: 767.98px) {
+
+  /* 1. Forzamos a la fila a comportarse como una tira horizontal continua */
+  .carrusel-movil-ajuste {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory; /* Hace que el deslizamiento se detenga exactamente en cada tarjeta */
+    -webkit-overflow-scrolling: touch; /* Suaviza el scroll en dispositivos iOS */
+    padding-bottom: 20px; /* Espacio extra para que no se corten las sombras de las tarjetas */
+  }
+
+  /* Oculta la barra de scroll inferior para mantener una interfaz limpia */
+  .carrusel-movil-ajuste::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 2. Forzamos a cada tarjeta a ocupar el 100% del ancho del dispositivo visual */
+  .carrusel-movil-ajuste .col-12 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    scroll-snap-align: center; /* Centra la tarjeta en la pantalla al deslizar */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Ajuste opcional para reducir tamaños de fuentes si los títulos son muy largos */
+  .service-title {
+    font-size: 1.25rem !important;
+  }
+}
+
+
+/* ============================================
+   7. CURSOS
+   ============================================ */
+.curso-container {
+  background-color: #10253d;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.curso-container .badge {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.0rem;
+}
+
+/* Botón Flotante Cursos */
+.floating-course-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 0;
+  z-index: 1050;
+  background-color: #10253d;
+  color: white;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  padding: 10px 15px;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.5s ease-in-out;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.floating-course-btn.visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.floating-course-btn:hover {
+  transform: translateX(-10px);
+}
+
+.floating-course-btn .btn-icon {
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  margin-top: 7px;
+}
+
+.floating-course-btn .btn-icon img {
+  width: 50px;
+  filter: invert(1) brightness(2);
+}
+
+.floating-course-btn .btn-title {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.floating-course-btn .btn-subtitle {
+  display: block;
+  font-size: 0.7rem;
+  margin-bottom: 5px;
+}
+
+.floating-course-btn .btn-action {
+  background: white;
+  color: #10253d;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 2px 15px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* ============================================
+   8. PROCESO DE DEMANDA
+   ============================================ */
+.text-navy {
+  color: #10253d;
+}
+
+.proceso-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .proceso-item {
+    width: calc(100% / 6);
+    margin-bottom: 0;
+  }
+}
+
+.circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-circle {
+  width: 110px;
+  height: 110px;
+  background-color: white;
+  border-radius: 50%;
+  border: 3px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.proceso-item:hover .icon-circle {
+  border-color: #f7b217;
+  transform: scale(1.05);
+}
+
+.step-number {
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  background-color: #f7b217;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+@media (min-width: 768px) {
+  .proceso-item:not(:last-child) .circle-container::after {
+    content: '';
+    position: absolute;
+    top: 55px;
+    left: 100%;
+    width: 80%;
+    height: 3px;
+    background-color: #e9ecef;
+    z-index: 1;
+  }
+}
+
+.step-title {
+  color: #10253d;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.step-desc {
+  line-height: 1.4;
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.btn-contacto-proceso {
+  background-color: #10253d;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 8px 30px;
+  border-radius: 10px;
+  border: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-contacto-proceso:hover {
+  background-color: #0c1c2e;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   9. TÍTULOS
+   ============================================ */
+h2 {
+  position: relative;
+  display: inline-block;
+}
+
+/* ============================================
+   10. ANIMACIONES
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate__fadeIn {
+  animation: fadeIn 0.5s;
+}
+
+/* ============================================ */
+/* 8. FLUJO DE PROCESO (LÍNEA DE TIEMPO)        */
+/* ============================================ */
+.proceso-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* Línea conectora gris idéntica a tu imagen de muestra */
+.proceso-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 75px;
+  left: 6%;
+  right: 6%;
+  height: 2px;
+  background-color: #e2e8f0;
+  z-index: 1;
+}
+
+.proceso-paso {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  padding: 0 5px;
+}
+
+.proceso-circulo-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  background-color: #f8f9fa; /* Cubre la línea de fondo con el color de la sección */
+  border: 2px solid #e2e8f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.proceso-numero {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffcf33; /* Tu color amarillo */
+  color: #01202c;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.proceso-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Alineación exacta para los iconos de fuente FontAwesome */
+.proceso-icono i {
+  font-size: 2.2rem;
+  color: #01202c;
+  display: inline-block;
+  line-height: 1;
+}
+
+.proceso-titulo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #01202c;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.proceso-texto {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  color: #6c757d;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 140px;
+}
+
+.btn-contacto {
+  background-color: #01202c;
+  color: #ffffff;
+  padding: 10px 35px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-contacto:hover {
+  background-color: #ffcf33;
+  color: #01202c;
+  transform: translateY(-2px);
+}
+
+.proceso-icono .text-primary-dark {
+  color: #01202c !important;
+}
+
+
+.proceso-icono .text-primary {
+  color: #1a5a96 !important; /* Tono azul corporativo de tu muestra */
+}
+
+/* ==========================================================================
+   9. AJUSTE PARA PANTALLAS MÓVILES (CELULARES) - SECCIÓN PROCESO
+   ========================================================================== */
+@media (max-width: 767.98px) {
+  /* Línea de Tiempo del Proceso Móvil */
+  .proceso-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
+    padding: 10px 0;
+  }
+
+  /* La línea conectora horizontal gira 90 grados para volverse vertical y centrarse */
+  .proceso-wrapper::before {
+    top: 20px;
+    bottom: 20px;
+    left: 50%;
+    right: auto;
+    width: 2px;
+    height: calc(100% - 130px);
+    transform: translateX(-50%);
+  }
+
+  .proceso-paso {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .proceso-circulo-wrapper {
+    width: 105px;
+    height: 105px;
+    margin-bottom: 12px;
+  }
+
+  .proceso-texto {
+    max-width: 100%;
+  }
+}
+
+/* ============================================
+   10. CHATBOT - PAQUETES Y PLANES DE SERVICIO
+   ============================================ */
+
+/* Contenedor que agrupa las tarjetas de paquetes dentro del chat */
+.chat-paquetes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  padding: 5px 0;
+  margin-top: 10px;
+}
+
+/* Tarjeta individual de cada paquete */
+.chat-paquete-card {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.chat-paquete-card:hover {
+  border-color: #ffcf33; /* Resalta con tu color amarillo corporativo */
+  transform: translateY(-2px);
+}
+
+/* Encabezado del paquete (Título y Precio) */
+.chat-paquete-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 8px;
+}
+
+.chat-paquete-titulo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #01202c; /* Tu color azul marino principal */
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.chat-paquete-precio {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffcf33; /* Resalte amarillo */
+}
+
+/* Lista de características incluidas en el paquete */
+.chat-paquete-caracteristicas {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chat-paquete-caracteristicas li {
+  font-size: 0.8rem;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Ícono de verificación (palomita) para las características */
+.chat-paquete-caracteristicas li i {
+  color: #2ecc71; /* Color verde de éxito */
+  font-size: 0.85rem;
+}
+
+/* Botón para seleccionar o contratar el paquete */
+.btn-seleccionar-paquete {
+  background-color: #01202c;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-seleccionar-paquete:hover {
+  background-color: #ffcf33;
+  color: #01202c;
+}
+
+/* Etiqueta especial para paquetes destacados (ej. "Más Vendido") */
+.chat-paquete-badge {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  background-color: #ffcf33;
+  color: #01202c;
+  font-size: 0.6rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   AJUSTE PARA PANTALLAS MÓVILES (CELULARES) - RESPONSIVO DE PAQUETES
+   ========================================================================== */
+@media (max-width: 767.98px) {
+  /* En móviles, aseguramos que aprovechen el 100% del ancho del chat */
+  .chat-paquetes-container {
+    gap: 12px;
+    padding: 0 5px;
+  }
+
+  .chat-paquete-card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .chat-paquete-titulo {
+    font-size: 0.9rem;
+  }
+
+  .chat-paquete-precio {
+    font-size: 1rem;
+  }
+
+  .chat-paquete-caracteristicas li {
+    font-size: 0.75rem; /* Ajuste sutil de lectura para pantallas pequeñas */
+  }
+}
+
+
+/* ============================================
+   11. RESPONSIVE
+   ============================================ */
+@media (max-width: 767px) {
+  .vertical-divider-container {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .stat-row-container {
+    justify-content: flex-start;
+    margin-left: 0;
+    transform: scale(0.9);
+  }
+
+  .stat-label-text {
+    font-size: 0.85rem;
+    margin-left: 35px;
+  }
+}
+
+@media (max-width: 576px) {
+  .separator-container .icon-wrapper {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    margin: 0 15px;
+  }
+}
+

@@ -1,4 +1,6 @@
-/* ---------------- NAVBAR ---------------- */
+/* ============================================
+   1. NAVBAR
+   ============================================ */
 .navbar {
   background-color: #01202cee;
   -webkit-backdrop-filter: blur(6px);
@@ -12,26 +14,14 @@
 .navbar-scrolled {
   padding: 0.2rem 2.5rem;
   background-color: #01202cf2;
+  margin-top: 100px !important;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
-}
-
-body {
-  padding-top: 0;
-}
-
-section {
-  scroll-margin-top: 100px; /* Ajustado para el navbar */
-}
-
-/* Mejorar visibilidad del carrusel de servicios */
-#servicesCarousel .carousel-item {
-  transition: transform 0.6s ease-in-out;
 }
 
 .navbar-brand img {
   height: 115px;
   width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .nav-link {
@@ -42,508 +32,132 @@ section {
   margin-left: 1rem;
   transition: color 0.3s ease;
 }
+
 .nav-link:hover {
   color: #ffcf33;
 }
+
 .nav-link.active {
   font-weight: bold;
   color: #ffc107;
 }
 
-/* ============================================
-   3. CARRUSEL PRINCIPAL
-   ============================================ */
-#mainCarousel {
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: var(--shadow-default);
+main {
+  flex: 1;
+  margin-top: 130px;
+  min-height: calc(100vh - 130px);
 }
 
-#mainCarousel .carousel-item img {
-  height: 710px;
-  object-fit: cover;
-}
-
-.carousel-indicators [data-bs-target] {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: transparent;
-  border: 2px solid #797979cb;
-  margin: 0 6px;
-  opacity: 1;
-}
-.carousel-indicators .active {
-  background-color: #ffffff;
-  border-color: #ffffffe7;
+.sobre-nosotros {
+  min-height: 500px;
+  padding-bottom: 3rem;
 }
 
 /* ============================================
-   4. SECCIONES Y SCROLLSPY
+   2. FOOTER (Mantiene 100% tus estilos)
    ============================================ */
-html {
-  scroll-padding-top: 180px;
-  scroll-behavior: smooth;
-}
-
-section {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s ease-out;
-  scroll-margin-top: 180px;
-}
-
-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ============================================
-   5. QUIÉNES SOMOS
-   ============================================ */
-.description-area {
-  font-family: 'Montserrat', sans-serif;
-  text-align: left;
-}
-
-.brand-title {
-  color: var(--color-primary);
-  letter-spacing: -1px;
-  font-size: 1.8rem;
-}
-
-.brand-subtitle {
-  letter-spacing: 0.5px;
-  color: var(--color-primary);
-  font-style: italic;
-}
-
-.description-area p {
-  font-size: 1rem;
-  line-height: 1.7;
-  text-align: justify;
-}
-
-.btn-brand-dark {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  border: none;
-  border-radius: 30px;
-  transition: var(--transition-default);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 0.8rem;
-}
-
-.btn-brand-dark:hover {
-  background-color: var(--color-accent);
-  color: var(--color-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
-}
-
-.btn-brand-dark:hover {
-  background-color: #ffcf33; /* El dorado de tu hover */
-  color: #01202c; /* Texto oscuro en hover */
-  transform: translateY(-2px); /* Pequeño levante */
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-}
-
-/* Clase auxiliar para el tamaño de fuente del botón */
-.fs-7 {
-  font-size: 0.85rem;
-}
-
-/* -------------------------------------------------------------------------- */
-
-/* Esto hace que el navegador se detenga antes de llegar al ID */
-section {
-  opacity: 0;
-  transform: translateY(50px); /* Empiezan un poco abajo */
-  transition: all 0.8s ease-out;
-  scroll-margin-top: 180px; /* Para que el scroll no pegue al borde */
-}
-
-/* Esta clase la pondrá el Intersection Observer */
-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Efecto opcional: La sección que seleccionas desde el menú
-   puede aparecer más rápido */
-.section-instant {
-  transition: opacity 0.4s ease-in !important;
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* Opcional: Para que el movimiento sea suave y no un salto brusco */
-html {
-  scroll-padding-top: 180px; /* Esto afecta a todos los saltos de ancla en la página */
-  scroll-behavior: smooth;
-}
-
-/* ============================================
-   6. STATS (Cápsulas)
-   ============================================ */
-.stats-area {
-  background: transparent; /* Quitamos el fondo blanco cuadrado */
-  padding: 10px;
-  box-shadow: none; /* Quitamos la sombra de la caja contenedora */
-}
-
-/* Contenedor de cada fila de estadística */
-.stat-row-container {
+.divider-section {
+  background-color: #081624;
+  padding: 0;
+  margin: 0;
+  height: 30px;
   display: flex;
-  align-items: center;
-  position: relative;
+  align-items: flex-end;
+}
+
+.white-line {
   width: 100%;
-  margin-bottom: 25px; /* Espacio entre cápsulas */
+  height: 4px;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-/* La cápsula oscura (Puck) con tu color de Navbar */
-.stat-puck {
-  background-color: #01202c; /* Color de tu navbar para consistencia */
-  color: #ffffff;
-  height: 55px;
-  min-width: 160px;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
+.footer-legal {
+  background-color: #081624;
+  color: white;
+  padding-top: 100px;
+  padding-bottom: 80px;
+  border-top: 4px solid #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-legal h4 {
   font-weight: 700;
-  font-size: 1.4rem;
-  position: relative;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.plus-sign {
-  font-size: 1.1rem;
-  margin-right: 4px;
-  color: #ffcf33; /* Color dorado de tus links en hover */
-}
-
-/* El círculo blanco que contiene el icono */
-.stat-icon-circle {
-  background-color: #ffffff;
-  color: #01202c;
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  border: 5px solid #01202c; /* El borde que "muerde" la cápsula */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: -31px; /* Desplazamiento exacto */
-  z-index: 2;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
-}
-
-.stat-icon-circle i {
-  font-size: 1.5rem;
-}
-
-/* El texto que va después del icono */
-.stat-label-text {
-  margin-left: 45px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  color: #01202c;
   text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  text-align: left;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
 }
 
-/* Ajuste para que el contador se vea bien */
-.counter {
-  display: inline-block;
-}
-
-/* ------------------------------------------------------- */
-
-/* ---------------- SEPARADOR DE BALANZA ---------------- */
-.separator-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 60px 0; /* Espaciado arriba y abajo */
-  width: 100%;
-}
-
-/* Las líneas laterales */
-.separator-container .line {
-  height: 2px;
-  flex-grow: 1; /* Hace que las líneas ocupen el espacio disponible */
-  background: linear-gradient(to right, transparent, #d4af37, transparent);
-  opacity: 0.6;
-}
-
-/* Contenedor del separador vertical */
-.vertical-divider-container {
-  display: flex;
-  flex-direction: column;
-  height: 300px; /* Ajusta según el alto de tu texto */
-}
-
-.vertical-line {
-  width: 2px;
-  background-color: #01202c;
-  flex-grow: 1;
-  opacity: 0.3;
-}
-
-/* Asegura que la imagen quepa en el círculo */
-.img-icon-stat {
-    width: 80px;       /* Ajusta este tamaño según tu diseño */
-    height: 100px;      /* Debe ser igual al width */
-    object-fit: contain;
-    display: block;
-
-}
-
-/* Opcional: Centrar la imagen si el círculo es un flexbox */
-.stat-icon-circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Ajustes de tipografía para la izquierda */
-.brand-title {
-  color: #01202c;
-  font-size: 1.8rem;
-}
-
-.brand-subtitle {
-  color: #01202c;
-  font-style: italic;
-}
-
-.description-area p {
-  text-align: justify;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-/* Botón sólido redondeado */
-.btn-brand-dark {
-  background-color: #01202c;
+/* Base de enlaces - El ancho máximo evita que se deformen */
+.contact-link, .social-icon {
   color: white;
-  border-radius: 20px;
-  font-size: 0.8rem;
-}
-
-
-
-/* Aseguramos que en móvil el separador desaparezca y deje espacio */
-@media (max-width: 767px) {
-  .vertical-divider-container {
-    display: none !important;
-  }
-}
-
-/* Ajuste para que se vea bien en móviles */
-@media (max-width: 576px) {
-  .separator-container .icon-wrapper {
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
-    margin: 0 15px;
-  }
-}
-
-/* ---------------- TITULOS ---------------- */
-h2 {
-  position: relative;
-  display: inline-block;
-}
-/* h2::after {
-  content: "";
-  display: block;
-  width: 50%;
-  height: 2px;
-  background: #0d6efd;
-  margin: 8px auto 0;
-} */
-
-
-/* ============================================
-   7. SERVICIOS (Tarjetas y Carrusel)
-   ============================================ */
-.service-card {
-  position: relative;
-  margin-top: 40px;
-  background: white;
-  border-radius: 20px;
-  padding: 60px 20px 30px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  height: auto;
-  min-height: 350px;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-5px);
-}
-
-.service-icon-container {
-  position: absolute;
-  top: -35px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-secondary);
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 5px solid #f8f9fa;
-}
-
-.service-icon-container img {
-  width: 80px;
-  height: 70px;
-  object-fit: contain;
-}
-
-.service-title {
-  color: var(--color-secondary);
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 1.1rem;
+  gap: 12px;
   margin-bottom: 15px;
+  font-size: 1rem;
+  text-align: left;
+  max-width: 100%;
 }
 
-.service-text {
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.4;
+.contact-link:hover, .social-icon:hover {
+  color: #f7b217;
+  transform: translateX(3px);
 }
 
-.btn-ver-mas {
-  background-color: var(--color-secondary);
-  color: #fff;
-  border-radius: 20px;
-  padding: 6px 20px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  border: none;
-  margin-top: 15px;
+.follow-us-block {
+  margin-top: 40px;
 }
 
-.btn-ver-mas:hover {
-  background-color: #162a47;
-  color: white;
+.social-icons-wrapper {
+  display: flex;
+  gap: 20px;
+  font-size: 1.3rem;
+  flex-wrap: wrap;
 }
 
-/* Carrusel de servicios */
-#servicesCarousel {
-  padding: 0 60px;
-  position: relative;
-}
-
-#servicesCarousel .carousel-item {
-  transition: transform 0.6s ease-in-out;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  width: 40px;
-  opacity: 0.8;
-  transition: opacity 0.3s;
-}
-
-.carousel-control-prev {
-  left: -10px;
-}
-
-.carousel-control-next {
-  right: -10px;
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-  opacity: 1;
-}
-
-.dark-icon {
-  filter: invert(1) grayscale(100%) brightness(0);
-  width: 40px;
-  height: 40px;
-}
-
-/* ------------ Contenedor del texto extra ------------*/
-.extra-info {
-    margin-top: 15px;
-    text-align: left; /* O center, según prefieras */
-    font-size: 0.9rem;
-    color: #444;
-}
-
-/* Para que la tarjeta crezca suavemente */
-.service-card {
-    height: auto; /* Cambia height: 100% por auto si tenías altura fija */
-    min-height: 350px;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Animación opcional (si quieres que aparezca suave) */
-.animate__fadeIn {
-    animation: fadeIn 0.5s;
-}
-
-/* --------- Botón "Ver más"  ---------*/
-.btn-ver-mas {
-  background-color: #10253d;
-  color: #fff;
-  border-radius: 20px;
-  padding: 6px 20px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  border: none;
-  margin-top: 15px;
-}
-
-.btn-ver-mas:hover {
-  background-color: #162a47;
-  color: white;
-}
-
-/* Flechas del Carousel (Oscuras) */
-.dark-icon {
-  filter: invert(1) grayscale(100%) brightness(0); /* Hace que las flechas de Bootstrap sean negras */
-}
-
-.custom-control {
-  width: 5%; /* Ajusta para que no tapen las tarjetas */
-}
-
-
-/* ============================================
-   8. CURSOS
-   ============================================ */
-.curso-container {
-  background-color: #10253d; /* El azul marino de la firma */
-  border-radius: 40px;
-  overflow: hidden;
-}
-
-.curso-container .badge {
-  width: 35px;
-  height: 35px;
-  display: inline-flex;
+.footer-logo-column {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.0rem;
 }
 
-/* Botón Flotante */
+.footer-logo {
+  max-width: 280px;
+  height: auto;
+  margin-bottom: 15px;
+  filter: brightness(1.1) contrast(1.1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.logo-tagline {
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.address-block {
+  text-align: right;
+  line-height: 1.8;
+  font-size: 0.9rem;
+  margin-bottom: 50px;
+}
+
+.copyright-block {
+  text-align: right;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ============================================
+   3. BOTÓN FLOTANTE DE CURSOS
+   ============================================ */
 .floating-course-btn {
   position: fixed;
   bottom: 100px;
@@ -554,19 +168,18 @@ h2 {
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   padding: 10px 15px;
-
-  /* Animación de entrada suave */
   opacity: 0;
   transform: translateX(100%);
   transition: all 0.5s ease-in-out;
-  pointer-events: none; /* No clickable si es invisible */
+  pointer-events: none;
+  visibility: hidden;
 }
 
-/* Clase que se activa con el scroll del TS */
 .floating-course-btn.visible {
   opacity: 1;
   transform: translateX(0);
   pointer-events: auto;
+  visibility: visible;
 }
 
 .floating-course-btn:hover {
@@ -583,9 +196,8 @@ h2 {
   justify-content: center;
   margin-right: 15px;
   margin-top: 7px;
+  flex-shrink: 0;
 }
-
-
 
 .floating-course-btn .btn-icon img {
   width: 50px;
@@ -616,374 +228,86 @@ h2 {
   display: inline-block;
 }
 
-
 /* ============================================
-   9. PROCESO DE DEMANDA
+   4. CHATBOT - BOTÓN FLOTANTE
    ============================================ */
-
-/* Color oficial de la firma */
-.text-navy {
-  color: #10253d;
-}
-
-/* Contenedor principal Flex */
-.proceso-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Espaciado para cada ítem en desktop */
-@media (min-width: 768px) {
-  .proceso-item {
-    width: calc(100% / 6); /* Un sexto del ancho */
-    margin-bottom: 0;
-  }
-}
-
-/* --- Los Círculos --- */
-.circle-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.icon-circle {
-  width: 110px; /* Tamaño del círculo de referencia */
-  height: 110px;
-  background-color: white;
-  border-radius: 50%;
-  border: 3px solid #e9ecef; /* Gris muy claro */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 2; /* Por encima de la línea */
-}
-
-/* Efecto al pasar el mouse por la tarjeta */
-.proceso-item:hover .icon-circle {
-  border-color: #f7b217; /* El amarillo de los números */
-  transform: scale(1.05);
-}
-
-/* --- Los Números Flotantes Amarillos --- */
-.step-number {
-  position: absolute;
-  top: -10px; /* Sube el número */
-  right: 15px; /* Lo desplaza a la derecha */
-  background-color: #f7b217; /* El amarillo corporativo */
-  color: white;
-  font-weight: bold;
-  font-size: 0.9rem;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-}
-
-/* --- Las Líneas Conectoras Estilo "Eslabón" --- */
-/* Solo en pantallas grandes */
-@media (min-width: 768px) {
-  /* No aplicamos en el último elemento (isLast) */
-  .proceso-item:not(:last-child) .circle-container::after {
-    content: '';
-    position: absolute;
-    top: 55px; /* Mitad del círculo de 110px */
-    left: 100%; /* Empieza donde termina el círculo actual */
-    width: 80%; /* Longitud del segmento conector */
-    height: 3px; /* Grosor */
-    background-color: #e9ecef; /* Mismo gris del borde */
-    z-index: 1; /* Por debajo de los círculos */
-  }
-}
-
-/* --- Estilo de Textos --- */
-.step-title {
-  color: #10253d; /* Azul marino */
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-}
-
-.step-desc {
-  line-height: 1.4;
-  color: #6c757d;
-  font-size: 0.8rem;
-}
-/* --- Botón Negro Final --- */
-.btn-contacto-proceso {
-  background-color: #10253d;
-  color: white;
-  font-weight: bold;
-  font-size: 0.9rem;
-  padding: 8px 30px;
-  border-radius: 10px;
-  border: none;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-}
-
-.btn-contacto-proceso:hover {
-  background-color: #0c1c2e;
-  transform: translateY(-2px);
-}
-
-/** --------------------------------------------- */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ---------------- RESPONSIVE ---------------- */
-@media (max-width: 768px) {
-  /* ... tus otros estilos ... */
-
-  .stat-row-container {
-    justify-content: flex-start;
-    margin-left: 0;
-    transform: scale(0.9); /* Un poco más pequeño en móvil */
-  }
-
-  .stat-label-text {
-    font-size: 0.85rem;
-    margin-left: 35px;
-  }
-}
-
-/** ---------------Footer----------------------- */
-/* --- Línea Estética de Transición --- */
-.divider-section {
-  background-color: #081624; /* Color de fondo de la sección de arriba (ajusta si es necesario) */
-  padding: 0;
-  margin: 0;
-  height: 30px; /* Espacio antes del footer */
-  display: flex;
-  align-items: flex-end;
-}
-
-.white-line {
-  width: 100%;
-  height: 4px; /* Grosor de la línea blanca */
-  background-color: #ffffff;
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.05); /* Sombra muy sutil */
-}
-
-.footer-legal {
-  background-color: #081624;
-  /* Quitamos el border-top anterior para que luzca la línea blanca */
-  border-top: none;
-}
-/* --- Nuevo Footer Pulido: Consultores 1509 --- */
-
-/* Contenedor principal del footer */
-.footer-legal {
-  background-color: #081624; /* El azul marino más oscuro */
-  color: white;
-  /* Aumentamos dramáticamente el espacio arriba y abajo para que respire */
-  padding-top: 100px;
-  padding-bottom: 80px;
-  border-top: 4px solid #ffffff; /* Reestablecemos la línea blanca estética */
-  font-family: 'Poppins', sans-serif; /* O la fuente que uses, para más elegancia */
-}
-
-/* Títulos: Contacts y Follow Us */
-.footer-legal h4 {
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 1.1rem;
-  margin-bottom: 25px; /* Más espacio debajo del título */
-}
-
-/* Links de contacto y redes sociales */
-.contact-link, .social-icon {
-  color: white;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 12px; /* Espacio entre icono y texto */
-  margin-bottom: 15px; /* Separación entre cada link */
-  font-size: 1rem;
-}
-
-.contact-link:hover, .social-icon:hover {
-  color: #f7b217; /* Toque dorado corporativo en hover */
-  transform: translateX(3px); /* Pequeño movimiento sutil */
-}
-
-/* El bloque Follow Us */
-.follow-us-block {
-  margin-top: 40px; /* Separación del bloque de contactos */
-}
-
-.social-icons-wrapper {
-  display: flex;
-  gap: 20px;
-  font-size: 1.3rem; /* Iconos un poco más grandes */
-}
-
-/* --- Ajuste Crítico del Logotipo Central --- */
-.footer-logo-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-logo {
-  max-width: 280px; /* Aumentamos el tamaño máximo para que se note */
-  height: auto;
-  margin-bottom: 15px;
-  /* El secreto para la nitidez: Un filtro de brillo y contraste suave */
-  filter: brightness(1.1) contrast(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-
-.logo-tagline {
-  font-size: 0.7rem;
-  font-weight: 300;
-  letter-spacing: 5px; /* Espaciado muy ancho entre letras, como en la referencia */
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0;
-}
-
-/* Columna Derecha: Dirección y Copyright */
-.address-block {
-  text-align: right;
-  line-height: 1.8;
-  font-size: 0.9rem;
-  margin-bottom: 50px; /* Mucho espacio antes del copyright */
-}
-
-.copyright-block {
-  text-align: right;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-/**----------------------------------------------- */
-/* Responsividad para móviles */
-@media (max-width: 767px) {
-  .footer-legal {
-    text-align: center;
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-
-  .footer-legal h4, .contact-link, .address-block, .copyright-block {
-    text-align: center !important;
-    justify-content: center;
-  }
-
-  .address-block {
-    margin-top: 30px;
-  }
-}
-
-/* Responsividad */
-@media (max-width: 768px) {
-  .footer-legal {
-    text-align: center;
-  }
-  .text-md-end {
-    text-align: center !important;
-  }
-  .footer-logo {
-    margin: 20px 0;
-  }
-}
-
-/* ============================================
-   11. CHATBOT
-   ============================================ */
-/* Botón flotante del chatbot (izquierda) */
 .chatbot-float-btn {
   position: fixed;
-  bottom: 100px;        /* Misma posición vertical que el botón de cursos */
-  left: 0;              /* ← En LUGAR de right: 0, ahora a la IZQUIERDA */
+  bottom: 100px;
+  left: 0;
   z-index: 1050;
-  background-color: #10253d;  /* Mismo color que el botón de cursos */
+  background: linear-gradient(135deg, #10253d 0%, #1a4a5c 100%);
   color: white;
-  border-top-right-radius: 50px;    /* ← Cambiado: esquinas derechas redondeadas */
-  border-bottom-right-radius: 50px; /* ← Cambiado: esquinas derechas redondeadas */
-  border-top-left-radius: 0;        /* ← Esquina izquierda recta */
-  border-bottom-left-radius: 0;     /* ← Esquina izquierda recta */
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
   padding: 10px 15px;
-
-  /* Animación de entrada suave - desde la izquierda */
-  opacity: 0;
-  transform: translateX(-100%);  /* ← Cambiado: viene desde la izquierda */
-  transition: all 0.5s ease-in-out;
-  pointer-events: none;
   display: flex;
   align-items: center;
+  gap: 12px;
   cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Clase que se activa con el scroll (opcional, puedes quitarla si quieres siempre visible) */
-.chatbot-float-btn.visible {
+.chatbot-float-btn.chat-open {
+  transform: translateX(-140px);
+  opacity: 0.85;
+}
+
+.chatbot-float-btn.chat-open:hover {
+  transform: translateX(-120px);
   opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto;
 }
 
-/* Si quieres que siempre esté visible (sin animación de scroll) */
-.chatbot-float-btn {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto;
-}
-
-/* Efecto hover - se desliza hacia la izquierda (similar al de cursos) */
 .chatbot-float-btn:hover {
-  transform: translateX(-10px);  /* Se mueve más a la izquierda al hacer hover */
+  transform: translateX(-8px);
 }
 
-/* Icono circular dentro del botón - MISMO ESTILO */
 .chatbot-float-btn .chatbot-icon {
   background: white;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 15px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .chatbot-float-btn .chatbot-icon i {
-  font-size: 28px;
+  font-size: 26px;
   color: #10253d;
+  transition: all 0.3s ease;
 }
 
-/* Contenido de texto del botón */
-.chatbot-float-btn .chatbot-content {
+.chatbot-content {
   text-align: center;
 }
 
-.chatbot-float-btn .chatbot-title {
+.chatbot-title {
   display: block;
   font-weight: bold;
-  font-size: 1rem;
-  line-height: 1;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
 }
 
-.chatbot-float-btn .chatbot-subtitle {
+.chatbot-subtitle {
   display: block;
-  font-size: 0.65rem;
-  margin-bottom: 5px;
-  opacity: 0.9;
+  font-size: 0.6rem;
+  margin-bottom: 4px;
+  opacity: 0.85;
 }
 
-/* Cuando el chat está abierto, el texto se reduce */
 .chatbot-float-btn.chat-open .chatbot-title {
   font-size: 0.8rem;
 }
 
 .chatbot-float-btn.chat-open .chatbot-subtitle {
-  display: none;  /* Oculta el subtítulo para ahorrar espacio */
+  display: none;
 }
 
 .chatbot-float-btn.chat-open .chatbot-icon {
@@ -991,49 +315,27 @@ h2 {
   height: 40px;
 }
 
-/* Opción 4: Casi invisible (200px) */
-.chatbot-float-btn.chat-open {
-  transform: translateX(-200px);
-  opacity: 0.6;
+.chatbot-float-btn.chat-open .chatbot-icon i {
+  font-size: 20px;
 }
 
-.chatbot-float-btn .chatbot-status {
+.chatbot-status {
   background: #2ecc71;
   color: white;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   padding: 2px 8px;
   border-radius: 20px;
   font-weight: bold;
   display: inline-block;
 }
 
-/* Pulso de atención (opcional, igual que el de cursos pero puedes quitarlo) */
-.chatbot-pulse {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: rgba(16, 37, 61, 0.4);
-  animation: pulseChatbot 1.5s ease-out infinite;
-  pointer-events: none;
-}
-
-@keyframes pulseChatbot {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
-/* ==================== VENTANA DEL CHATBOT ==================== */
+/* ============================================
+   5. CHATBOT - VENTANA
+   ============================================ */
 .chatbot-window {
   position: fixed;
   bottom: 180px;
-  left: 20px;           /* ← Posicionado a la izquierda (cambié right por left) */
+  left: 20px;
   width: 380px;
   height: 550px;
   background: white;
@@ -1044,7 +346,7 @@ h2 {
   overflow: hidden;
   transform: scale(0);
   opacity: 0;
-  transform-origin: bottom left;  /* ← Cambiado: animación desde izquierda */
+  transform-origin: bottom left;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   z-index: 1049;
 }
@@ -1054,7 +356,6 @@ h2 {
   opacity: 1;
 }
 
-/* Header del chatbot - MISMO COLOR que el botón de cursos */
 .chatbot-header {
   background: linear-gradient(135deg, #10253d 0%, #1a4a5c 100%);
   color: white;
@@ -1096,7 +397,7 @@ h2 {
 }
 
 .chatbot-close {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border: none;
   color: white;
   width: 30px;
@@ -1107,11 +408,10 @@ h2 {
 }
 
 .chatbot-close:hover {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
   transform: rotate(90deg);
 }
 
-/* Área de mensajes */
 .chat-messages {
   flex: 1;
   overflow-y: auto;
@@ -1122,7 +422,6 @@ h2 {
   gap: 12px;
 }
 
-/* Mensajes */
 .message-wrapper {
   display: flex;
   gap: 10px;
@@ -1130,413 +429,89 @@ h2 {
 }
 
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.message-wrapper.user-message {
-  flex-direction: row-reverse;
-}
 
-.message-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #e9ecef;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
-}
-
-.user-message .message-avatar {
-  background: #10253d;
-  color: white;
-}
-
-.bot-message .message-avatar {
-  background: #ffcf33;
-  color: #10253d;
-}
-
-.message-content {
-  max-width: 70%;
-  flex: 1;
-}
-
-.user-message .message-content {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.message-bubble {
-  background: white;
-  padding: 10px 14px;
-  border-radius: 15px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.user-message .message-bubble {
-  background: #10253d;
-  color: white;
-}
-
-.message-text {
-  font-size: 13px;
-  line-height: 1.5;
-  white-space: pre-line;
-}
-
-.message-time {
-  font-size: 10px;
-  margin-top: 5px;
-  opacity: 0.6;
-  text-align: right;
-}
-
-/* Paquetes en el chat */
-.paquetes-container {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.paquete-card {
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 10px;
-  cursor: pointer;
-  transition: all 0.3s;
-  border: 1px solid #e9ecef;
-}
-
-.paquete-card:hover {
-  transform: translateX(5px);
-  border-color: #ffcf33;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.paquete-icon {
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-
-.paquete-card h5 {
-  font-size: 13px;
-  font-weight: bold;
-  margin: 0 0 5px 0;
-}
-
-.paquete-card p {
-  font-size: 11px;
-  margin: 0 0 8px 0;
-  color: #6c757d;
-}
-
-.paquete-precio {
-  font-size: 14px;
-  font-weight: bold;
-  color: #10253d;
-  margin: 5px 0;
-}
-
-.paquete-duracion {
-  font-size: 10px;
-  color: #6c757d;
-  margin-bottom: 8px;
-}
-
-.btn-paquete {
-  width: 100%;
-  background: #10253d;
-  color: white;
-  border: none;
-  padding: 5px;
-  border-radius: 8px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.btn-paquete:hover {
-  background: #ffcf33;
-  color: #10253d;
-}
-
-/* Servicios en el chat */
-.servicios-chat {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.servicio-chat-item {
-  background: white;
-  padding: 8px 12px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.3s;
-  border: 1px solid #e9ecef;
-}
-
-.servicio-chat-item:hover {
-  background: #f8f9fa;
-  transform: translateX(5px);
-}
-
-.servicio-chat-item i:first-child {
-  font-size: 18px;
-  color: #10253d;
-}
-
-.servicio-chat-item div {
-  flex: 1;
-}
-
-.servicio-chat-item strong {
-  display: block;
-  font-size: 12px;
-}
-
-.servicio-chat-item small {
-  font-size: 10px;
-  color: #6c757d;
-}
-
-/* Indicador de escritura */
-.typing-indicator {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  background: white;
-  border-radius: 15px;
-  width: fit-content;
-}
-
-.typing-dots {
-  display: flex;
-  gap: 4px;
-}
-
-.typing-dots span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #10253d;
-  animation: typing 1.4s infinite;
-}
-
-.typing-dots span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.typing-dots span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes typing {
-  0%, 60%, 100% {
-    transform: translateY(0);
-  }
-  30% {
-    transform: translateY(-8px);
-  }
-}
-
-.typing-text {
-  font-size: 11px;
-  color: #6c757d;
-}
-
-/* Input del chatbot */
-.chatbot-input {
-  padding: 12px;
-  background: white;
-  border-top: 1px solid #e9ecef;
-}
-
-.input-group {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.chat-input {
-  flex: 1;
-  padding: 8px 12px;
-  border: 2px solid #e9ecef;
-  border-radius: 25px;
-  font-size: 13px;
-  outline: none;
-  transition: all 0.3s;
-}
-
-.chat-input:focus {
-  border-color: #10253d;
-}
-
-.send-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #10253d;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.send-btn:hover:not(:disabled) {
-  background: #ffcf33;
-  transform: scale(1.1);
-}
-
-.send-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Acciones rápidas */
-.chatbot-quick-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-}
-
-.quick-action-btn {
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: all 0.3s;
-  color: #10253d;
-}
-
-.quick-action-btn:hover {
-  background: #10253d;
-  color: white;
-  border-color: #10253d;
-}
-
-/* Responsive para móviles */
-@media (max-width: 768px) {
-  .chatbot-window {
-    width: calc(100vw - 40px);
-    height: calc(100vh - 120px);
-    bottom: 100px;
-    left: 20px;
-    right: 20px;
+/* ============================================
+   6. SECCIÓN RESPONSIVE EXCLUSIVA MÓVIL
+   ============================================ */
+@media (max-width: 767px) {
+  /* Control Navbar */
+  .navbar {
+    padding: 0.5rem 1rem;
   }
 
+  .navbar-brand img {
+    height: 70px; /* Reducción óptima para celulares */
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+    margin-left: 0;
+    padding: 0.6rem 0;
+    text-align: center;
+  }
+
+  main {
+    margin-top: 85px;
+    min-height: calc(100vh - 85px);
+  }
+
+  /* Blindaje del Footer e Íconos */
+  .footer-legal {
+    padding-top: 45px;
+    padding-bottom: 40px;
+    text-align: center;
+  }
+
+  /* Evita que las columnas se empujen mal; las fuerza a listarse hacia abajo */
+  .footer-legal .row,
+  .footer-legal [class*="col-"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* SEGURO PARA QUE NO SE DESFACEN LOS ÍCONOS DE CONTACTO */
+  .contact-link, .social-icon {
+    justify-content: center;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 10px; /* Separación fija ícono-texto */
+  }
+
+  /* Centrado de la caja de redes sociales */
+  .social-icons-wrapper {
+    justify-content: center;
+    gap: 25px;
+  }
+
+  .address-block,
+  .copyright-block {
+    text-align: center !important; /* Desactiva el text-align: right de PC */
+    margin-bottom: 25px;
+  }
+
+  .copyright-block {
+    margin-bottom: 0;
+  }
+
+  /* Rediseño de Botones Flotantes Inferiores para pantallas táctiles */
+  .floating-course-btn,
   .chatbot-float-btn {
-    bottom: 80px;
-    padding: 8px 12px;
+    bottom: 12px;
+    padding: 8px 14px;
+    max-width: 46%; /* Evita colisión mutua */
   }
 
-  .chatbot-float-btn .chatbot-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .chatbot-float-btn .chatbot-icon i {
-    font-size: 22px;
-  }
-
-  .chatbot-title {
-    font-size: 0.85rem;
-  }
-
-  .chatbot-subtitle {
-    font-size: 0.55rem;
+  /* Botón de cursos compacto */
+  .floating-course-btn {
   }
 }
-
-/* Opciones clickeables del chat */
-.opciones-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.opcion-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
-  border-radius: 12px;
-  padding: 12px 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  text-align: left;
-}
-
-.opcion-btn:hover {
-  background: #10253d;
-  border-color: #ffcf33;
-  transform: translateX(5px);
-}
-
-.opcion-btn:hover .opcion-texto {
-  color: white;
-}
-
-.opcion-icono {
-  font-size: 24px;
-}
-
-.opcion-numero {
-  background: #10253d;
-  color: white;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.opcion-btn:hover .opcion-numero {
-  background: #ffcf33;
-  color: #10253d;
-}
-
-.opcion-texto {
-  flex: 1;
-  font-weight: 500;
-  color: #333;
-  font-size: 14px;
-}
-
-.opcion-btn i {
-  color: #10253d;
-  opacity: 0.5;
-  transition: all 0.3s;
-}
-
-.opcion-btn:hover i {
-  opacity: 1;
-  transform: translateX(3px);
-  color: #ffcf33;
-}
-
-

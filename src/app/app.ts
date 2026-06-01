@@ -1,19 +1,12 @@
-import { AfterViewInit, Component, HostListener, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, Inject, PLATFORM_ID, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import * as bootstrap from 'bootstrap';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ChatbotAIService } from './services/chatbot-ai.service.ts';
 
 // ============================================
 // INTERFACES
 // ============================================
-
-interface Servicio {
-  title: string;
-  desc: string;
-  icon: string;
-  url: string;
-}
-
 interface MensajeChat {
   texto: string;
   esUsuario: boolean;
@@ -57,137 +50,37 @@ interface InfoCliente {
 // ============================================
 // COMPONENTE PRINCIPAL
 // ============================================
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
-export class App implements AfterViewInit, OnInit {
+export class App implements OnInit, AfterViewInit, OnDestroy {
 
-  // ============================================
-  // PROPIEDADES DEL CARRUSEL Y NAVBAR
-  // ============================================
-
-  slides = [
-    { src: 'assets/IMAGEN FONDO 01-01.jpeg', caption: '' },
-    { src: 'https://picsum.photos/1200/400?random=2', caption: '' },
-    { src: 'https://picsum.photos/1200/400?random=3', caption: '' },
-    { src: 'https://picsum.photos/1200/400?random=4', caption: '' },
-    { src: 'https://picsum.photos/1200/400?random=5', caption: '' }
-  ];
-
-  items = [
-    {
-      id: 'inicio',
-      label: '',
-      navLabel: 'INICIO',
-      type: 'inicio',
-      content: {}
-    },
-    {
-      id: 'quienes',
-      label: 'QUIENES SOMOS',
-      navLabel: 'QUIENES SOMOS',
-      type: 'quienes',
-      content: {
-        title: 'CONSULTORES 1509',
-        subtitle: 'Conocimiento, experiencia y compromiso en cada solución jurídica',
-        description1: 'Fundada en 2012, es una firma especializada en materia legal, corporativa, contractual, societaria e inmobiliaria.',
-        description2: 'Nuestro equipo está integrado por profesionales con sólida formación técnica y amplia trayectoria.',
-        button: 'MÁS SOBRE NOSOTROS'
-      },
-      stats: [
-        { value: 15855, label: 'VISITAS A LA PAGINA', icon: 'assets/ICONO A-01.png' },
-        { value: 253, label: 'DEMANDAS ACTIVAS', icon: 'assets/ICONO B-01.png' },
-        { value: 15855, label: 'DEMANDAS GANADAS', icon: 'assets/ICONO C-01.png' }
-      ]
-    },
-    {
-      id: 'servicios',
-      navLabel: 'SERVICIOS',
-      label: 'NUESTROS SERVICIOS',
-      type: 'servicios',
-      servicios: [
-        {
-          title: 'PREVENCIÓN DE LAVADO DE DINERO',
-          desc: 'Ayudamos a nuestros clientes en un esfuerzo conjunto entre autoridades, entidades financieras y empresas...',
-          icon: 'assets/ICONO 4-01.png',
-          url: '/lavado-dinero'
-        },
-        {
-          title: 'DERECHO ADMINISTRATIVO',
-          desc: 'Asesorar, representar y defender los intereses de nuestros clientes frente a la administracion publica...',
-          icon: 'assets/ICONO 2-01.png',
-          url: '/derecho-administrativo'
-        },
-        {
-          title: 'DERECHO CORPORATIVO',
-          desc: 'Asesoramos a nuestros clientes para garantizar que sus empresas y/o negocios cumplan con todas las leyes...',
-          icon: 'assets/ICONO 6-01.png',
-          url: '/derecho-corporativo'
-        },
-        {
-          title: 'DERECHO CIVIL / FAMILIAR',
-          desc: 'Asesoramos y representamos legalmente a nuestros clientes en jucios, medicacion y redaccion de documentos...',
-          icon: 'assets/ICONO 5-01.png',
-          url: '/civil-familiar'
-        },
-        {
-          title: 'DERECHO MERCANTIL',
-          desc: 'Asesoramos y representamos a nuestros clientes en asuntos legales relacionados con sus actividades comerciales...',
-          icon: 'assets/ICONO 3-01.png',
-          url: '/derecho-mercantil'
-        },
-        {
-          title: 'DERECHO INTELECTUAL',
-          desc: 'Asesoramos a nuestros clientes a proteger sus creaciones como obras literarias, marcas y derechos de autor.',
-          icon: 'assets/ICONO 1-01.png',
-          url: '/derecho-intelectual'
-        }
-      ]
-    },
-    {
-      id: 'cursos',
-      navLabel: 'CURSOS',
-      label: '',
-      type: '',
-      content: {}
-    },
-    {
-      id: 'contacto',
-      navLabel: 'CONTACTO',
-      label: 'PROCESO DE DEMANDA',
-      type: 'proceso',
-      pasos: [
-        { number: 1, title: 'REQUEST CALL', desc: 'Lorem ipsum...', icon: 'fas fa-phone-alt' },
-        { number: 2, title: 'CONSULTATION', desc: 'Lorem ipsum...', icon: 'fas fa-comments' },
-        { number: 3, title: 'PLANNING', desc: 'Lorem ipsum...', icon: 'fas fa-project-diagram' },
-        { number: 4, title: 'WORK PROCESS', desc: 'Lorem ipsum...', icon: 'fas fa-gavel' },
-        { number: 5, title: 'CORRECTING', desc: 'Lorem ipsum...', icon: 'fas fa-pen-nib' },
-        { number: 6, title: 'DELIVER', desc: 'Lorem ipsum...', icon: 'fas fa-check-double' }
-      ],
-      content: { button: 'CONTACTO' }
-    }
-  ];
-
-  serviciosAgrupados: any[][] = [];
-  showFloatingBtn = false;
   isBrowser: boolean;
+  isMenuOpen = false;
 
-  // ============================================
-  // PROPIEDADES DEL CHATBOT
-  // ============================================
+toggleMenu() {
+  this.isMenuOpen = !this.isMenuOpen;
+}
 
-  showChatbot = false;
-  mensajes: MensajeChat[] = [];
-  mensajeUsuario = '';
-  chatbotEstaEscribiendo = false;
-  chatForm: FormGroup;
+closeMenu() {
+  this.isMenuOpen = false;
+}
 
-  // Estado del flujo conversacional
+  private chatInicializado = false;
+  private observer: IntersectionObserver | null = null;
+
+  navItems = [
+    { id: 'inicio', navLabel: 'INICIO', path: '/' },
+    { id: 'quienes', navLabel: 'QUIENES SOMOS', path: '/quienes' },
+    { id: 'servicios', navLabel: 'SERVICIOS', path: '/servicios' },
+    { id: 'cursos', navLabel: 'CURSOS', path: '/cursos' },
+    { id: 'contacto', navLabel: 'CONTACTO', path: '/contacto' }
+  ];
+
   estadoConversacion: EstadoConversacion = {
     paso: 'inicio',
     contexto: {}
@@ -203,7 +96,6 @@ export class App implements AfterViewInit, OnInit {
     { paso: 'confirmacion', pregunta: '✅ ¿Confirmas que los datos son correctos?', campo: 'confirmacion', validacion: 'si_no' }
   ];
 
-  // Datos de paquetes
   paquetesDisponibles: PaqueteServicio[] = [
     {
       id: 1,
@@ -264,117 +156,59 @@ export class App implements AfterViewInit, OnInit {
     }
   ];
 
-  // ============================================
-  // CONSTRUCTOR
-  // ============================================
+  // Chatbot
+  showChatbot = false;
+  mensajes: MensajeChat[] = [];
+  mensajeUsuario = '';
+  chatbotEstaEscribiendo = false;
+  showFloatingBtn = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private chatbotAI: ChatbotAIService
+  ) {
     this.isBrowser = isPlatformBrowser(platformId);
-    this.chatForm = this.fb.group({
-      mensaje: ['']
-    });
   }
 
-  // ============================================
-  // CICLO DE VIDA
-  // ============================================
+
 
   ngOnInit(): void {
-    this.agruparServicios();
-    this.inicializarChatbot();
+    if (!this.chatInicializado) {
+      this.inicializarChatbot();
+      this.chatInicializado = true;
+    }
   }
 
   ngAfterViewInit(): void {
-    if (!this.isBrowser) return;
-    setTimeout(() => {
-      const mainCarousel = document.getElementById('mainCarousel');
-      if (mainCarousel) {
-        new bootstrap.Carousel(mainCarousel, { interval: 5000 });
-      }
-
-      const servicesCarousel = document.getElementById('servicesCarousel');
-      if (servicesCarousel) {
-        new bootstrap.Carousel(servicesCarousel, {
-          interval: false,
-          wrap: true
-        });
-      }
-
-      this.setupIntersectionObserver();
-    }, 500);
-  }
-
-  // ============================================
-  // MÉTODOS DE SERVICIOS Y CARRUSEL
-  // ============================================
-
-  agruparServicios(): void {
-    const serviciosRaw = this.items.find(i => i.type === 'servicios')?.servicios || [];
-    const TamañoGrupo = 3;
-    for (let i = 0; i < serviciosRaw.length; i += TamañoGrupo) {
-      this.serviciosAgrupados.push(serviciosRaw.slice(i, i + TamañoGrupo));
+    if (this.isBrowser) {
+      setTimeout(() => {
+        this.detectarElementosVisibles();
+      }, 100);
     }
   }
 
-  setupIntersectionObserver() {
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver((entries) => {
+  ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
+  private detectarElementosVisibles(): void {
+    const sections = document.querySelectorAll('section, .animate-fade, .service-card, .curso-container, .proceso-item');
+
+    this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          const counters = entry.target.querySelectorAll('.counter');
-          counters.forEach(counter => {
-            if (!counter.hasAttribute('data-animated')) {
-              this.animateSingleCounter(counter as HTMLElement);
-              counter.setAttribute('data-animated', 'true');
-            }
-          });
+          this.observer?.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
-    sections.forEach(section => observer.observe(section));
-  }
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  animateSingleCounter(counter: HTMLElement) {
-    const target = parseInt(counter.getAttribute('data-target') || '0', 10);
-    let current = 0;
-    const increment = target / 60;
-    const updateCounter = () => {
-      current += increment;
-      if (current < target) {
-        counter.textContent = Math.floor(current).toLocaleString();
-        requestAnimationFrame(updateCounter);
-      } else {
-        counter.textContent = target.toLocaleString();
-      }
-    };
-    updateCounter();
+    sections.forEach(section => {
+      this.observer?.observe(section);
+    });
   }
-
-  navegarAServicio(servicio: any) {
-    console.log('Navegando a:', servicio.url);
-  }
-
-  scrollToCursos(event: Event): void {
-    event.preventDefault();
-    const cursosSection = document.getElementById('cursos');
-    if (cursosSection) {
-      cursosSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  }
-
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    if (!this.isBrowser) return;
-    this.showFloatingBtn = window.scrollY > 800;
-  }
-
-  // ============================================
-  // MÉTODOS DEL CHATBOT - INICIALIZACIÓN
-  // ============================================
 
   inicializarChatbot(): void {
     this.mensajes = [
@@ -409,9 +243,30 @@ export class App implements AfterViewInit, OnInit {
     }
   }
 
-  // ============================================
-  // MÉTODOS DEL CHATBOT - MENSAJES
-  // ============================================
+  scrollToCursos(event: Event): void {
+    event.preventDefault();
+    const cursosSection = document.getElementById('cursos');
+    if (cursosSection) {
+      cursosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  scrollChatAlFinal(): void {
+    const chatContainer = document.querySelector('.chat-messages');
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }
+
+  formatearHora(fecha: Date): string {
+    return fecha.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  onKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.enviarMensaje();
+    }
+  }
 
   enviarMensaje(): void {
     if (!this.mensajeUsuario.trim()) return;
@@ -424,74 +279,240 @@ export class App implements AfterViewInit, OnInit {
     };
     this.mensajes.push(mensajeUser);
 
-    const consulta = this.mensajeUsuario.toLowerCase();
+    const consulta = this.mensajeUsuario;
     this.mensajeUsuario = '';
     this.scrollChatAlFinal();
     this.chatbotEstaEscribiendo = true;
 
     setTimeout(() => {
       this.procesarRespuestaBot(consulta);
-      this.chatbotEstaEscribiendo = false;
-      this.scrollChatAlFinal();
-    }, 800);
+    }, 500);
   }
 
-  procesarRespuestaBot(consulta: string): void {
-    // Verificar si estamos en medio de un flujo
+  async procesarRespuestaBot(consulta: string): Promise<void> {
     if (this.estadoConversacion.paso !== 'inicio') {
       this.procesarFlujoConversacional(consulta);
+      this.chatbotEstaEscribiendo = false;
+      this.scrollChatAlFinal();
       return;
     }
 
-    let respuesta = '';
-    let tipoRespuesta: 'texto' | 'paquete' | 'servicio' | 'opciones' = 'texto';
-    let dataRespuesta: any = null;
+    try {
+      const respuestaAI = await this.chatbotAI.obtenerRespuestaAI(
+        consulta,
+        this.mensajes,
+        this.paquetesDisponibles,
+        this.serviciosChatbot
+      );
 
-    // Detectar intención del usuario
-    if (consulta.includes('paquete') || consulta.includes('precio') || consulta === '1') {
-      respuesta = '📦 Te muestro nuestros paquetes disponibles. ¿Cuál te interesa?';
-      tipoRespuesta = 'paquete';
-      dataRespuesta = this.paquetesDisponibles;
-    }
-    else if (consulta.includes('servicio') || consulta === '2') {
-      respuesta = '⚖️ Estos son nuestros servicios especializados. ¿Sobre cuál quieres más información?';
-      tipoRespuesta = 'servicio';
-      dataRespuesta = this.serviciosChatbot;
-    }
-    else if (consulta.includes('asesor') || consulta.includes('hablar') || consulta === '3') {
-      respuesta = '📞 ¡Excelente! Un asesor se comunicará contigo. Primero, necesito algunos datos:';
-      this.iniciarFlujoContacto();
-      return;
-    }
-    else if (consulta.includes('cotiz') || consulta === '4') {
-      respuesta = '💰 Para una cotización personalizada, necesito conocer más sobre tu negocio.';
-      this.iniciarFlujoCotizacion();
-      return;
-    }
-    else if (consulta.includes('curso') || consulta.includes('pld') || consulta === '5') {
-      respuesta = '🎓 Nuestro curso PLD incluye certificación oficial. ¿Te gustaría inscribirte?';
-      this.iniciarFlujoCurso();
-      return;
-    }
-    else {
-      respuesta = '🤔 ¿Te interesa conocer nuestros paquetes o servicios?\n\nResponde con el número:\n1️⃣ Paquetes\n2️⃣ Servicios\n3️⃣ Asesor\n4️⃣ Cotización\n5️⃣ Cursos PLD';
-    }
+      const mensajeBot: MensajeChat = {
+        texto: respuestaAI.texto,
+        esUsuario: false,
+        timestamp: new Date(),
+        tipo: respuestaAI.tipo,
+        data: respuestaAI.data
+      };
 
-    const mensajeBot: MensajeChat = {
-      texto: respuesta,
-      esUsuario: false,
-      timestamp: new Date(),
-      tipo: tipoRespuesta,
-      data: dataRespuesta
-    };
-
-    this.mensajes.push(mensajeBot);
+      this.mensajes.push(mensajeBot);
+    } catch (error) {
+      console.error('Error al procesar respuesta:', error);
+      const mensajeBot: MensajeChat = {
+        texto: 'Lo siento, tuve un problema técnico. Por favor, intenta de nuevo o contacta a un asesor al (33) 19839037.',
+        esUsuario: false,
+        timestamp: new Date(),
+        tipo: 'texto'
+      };
+      this.mensajes.push(mensajeBot);
+    } finally {
+      this.chatbotEstaEscribiendo = false;
+      this.scrollChatAlFinal();
+    }
   }
 
+  seleccionarOpcionChat(accion: string): void {
+    let mensajeUsuario = '';
+
+    switch (accion) {
+      case 'paquetes':
+        mensajeUsuario = 'quiero ver los paquetes';
+        break;
+      case 'servicios':
+        mensajeUsuario = 'quiero ver los servicios';
+        break;
+      case 'asesor':
+        mensajeUsuario = 'quiero hablar con un asesor';
+        break;
+      case 'cotizacion':
+        mensajeUsuario = 'quiero una cotización';
+        break;
+      case 'curso':
+        mensajeUsuario = 'información sobre cursos PLD';
+        break;
+      default:
+        mensajeUsuario = accion;
+    }
+
+    const mensajeUser: MensajeChat = {
+      texto: mensajeUsuario,
+      esUsuario: true,
+      timestamp: new Date(),
+      tipo: 'texto'
+    };
+    this.mensajes.push(mensajeUser);
+    this.scrollChatAlFinal();
+    this.chatbotEstaEscribiendo = true;
+
+    setTimeout(() => {
+      this.procesarRespuestaBot(mensajeUsuario);
+    }, 500);
+  }
+
+  seleccionarOpcion(opcion: string, data?: any): void {
+    this.mensajeUsuario = opcion;
+    this.enviarMensaje();
+  }
+
+  seleccionarPaquete(paquete: PaqueteServicio): void {
+    const mensajeConfirmacion = `✨ Has seleccionado: ${paquete.nombre}\n\n💰 ${paquete.precio}\n📅 ${paquete.duracion}\n\n¿Deseas agendar una llamada con un asesor?\n\nResponde "si" o "no"`;
+
+    const mensajeBot: MensajeChat = {
+      texto: mensajeConfirmacion,
+      esUsuario: false,
+      timestamp: new Date(),
+      tipo: 'texto'
+    };
+    this.mensajes.push(mensajeBot);
+    this.scrollChatAlFinal();
+
+    this.estadoConversacion = {
+      paso: 'confirmar_paquete',
+      contexto: { paquete: paquete, tipo: 'confirmacion_paquete' }
+    };
+  }
+
+
+  solicitarAsesor(): void {
+  // Mostrar información de contacto
+  const mensajeInfo: MensajeChat = {
+    texto: '📞 **Información de contacto de Consultores 1509**\n\n' +
+           '📱 **WhatsApp:** (33) 19839037\n' +
+           '📱 **Teléfono:** 33 2228 2578\n' +
+           '📧 **Email:** consultores@gmail.com\n\n' +
+           '⏰ **Horario de atención:**\n' +
+           '   Lunes a Viernes: 9:00 - 19:00 hrs\n' +
+           '   Sábados: 10:00 - 14:00 hrs\n\n' +
+           '📍 **Dirección:**\n' +
+           '   Montevide N° 2789, Col. Providencia\n' +
+           '   Guadalajara, Jalisco C.P. 44630',
+    esUsuario: false,
+    timestamp: new Date(),
+    tipo: 'texto'
+  };
+  this.mensajes.push(mensajeInfo);
+  this.scrollChatAlFinal();
+
+  // Opciones adicionales
+  setTimeout(() => {
+    const opcionesMsg: MensajeChat = {
+      texto: '¿Necesitas más información?\n\n1️⃣ Ver PAQUETES\n2️⃣ Ver SERVICIOS\n3️⃣ Volver al menú principal',
+      esUsuario: false,
+      timestamp: new Date(),
+      tipo: 'texto'
+    };
+    this.mensajes.push(opcionesMsg);
+    this.scrollChatAlFinal();
+  }, 500);
+}
+
   // ============================================
-  // MÉTODOS DEL CHATBOT - FLUJO CONVERSACIONAL
+  // MÉTODOS DE FLUJO CONVERSACIONAL
   // ============================================
 
+
+
+  iniciarFlujoContacto(): void {
+    const mensajeInfo: MensajeChat = {
+      texto: '📞 **Información de contacto de Consultores 1509**\n\n' +
+             '📱 **WhatsApp:** (33) 19839037\n' +
+             '📱 **Teléfono:** 33 2228 2578\n' +
+             '📧 **Email:** consultores@gmail.com\n\n' +
+             '⏰ **Horario de atención:**\n' +
+             '   Lunes a Viernes: 9:00 - 19:00 hrs\n' +
+             '   Sábados: 10:00 - 14:00 hrs\n\n' +
+             '📍 **Dirección:**\n' +
+             '   Montevide N° 2789, Col. Providencia\n' +
+             '   Guadalajara, Jalisco C.P. 44630\n\n' +
+             '¿Te gustaría que un asesor te contacte?',
+      esUsuario: false,
+      timestamp: new Date(),
+      tipo: 'texto'
+    };
+    this.mensajes.push(mensajeInfo);
+    this.scrollChatAlFinal();
+
+    setTimeout(() => {
+      const opcionesMsg: MensajeChat = {
+        texto: 'Responde:\n1️⃣ "Que me contacten"\n2️⃣ "Volver al menú"',
+        esUsuario: false,
+        timestamp: new Date(),
+        tipo: 'texto'
+      };
+      this.mensajes.push(opcionesMsg);
+      this.scrollChatAlFinal();
+
+      this.estadoConversacion = {
+        paso: 'contacto_info',
+        contexto: { tipo: 'contacto_info' }
+      };
+    }, 500);
+  }
+
+  iniciarFlujoContactoDatos(): void {
+    this.estadoConversacion = {
+      paso: 'nombre',
+      contexto: { tipo: 'contacto' }
+    };
+    const mensajeBot: MensajeChat = {
+      texto: '📝 Perfecto. ¿Cuál es tu nombre?',
+      esUsuario: false,
+      timestamp: new Date(),
+      tipo: 'texto'
+    };
+    this.mensajes.push(mensajeBot);
+    this.scrollChatAlFinal();
+  }
+
+  iniciarFlujoCotizacion(): void {
+    this.estadoConversacion = {
+      paso: 'nombre',
+      contexto: { tipo: 'cotizacion' }
+    };
+    const mensajeBot: MensajeChat = {
+      texto: '📋 Para darte una cotización personalizada, necesito algunos datos:\n\n' + this.flujoContacto[0].pregunta,
+      esUsuario: false,
+      timestamp: new Date(),
+      tipo: 'texto'
+    };
+    this.mensajes.push(mensajeBot);
+    this.scrollChatAlFinal();
+  }
+
+  iniciarFlujoCurso(): void {
+    this.estadoConversacion = {
+      paso: 'nombre',
+      contexto: { tipo: 'curso' }
+    };
+    const mensajeBot: MensajeChat = {
+      texto: '🎓 Para inscribirte en el curso PLD, necesito tus datos:\n\n' + this.flujoContacto[0].pregunta,
+      esUsuario: false,
+      timestamp: new Date(),
+      tipo: 'texto'
+    };
+    this.mensajes.push(mensajeBot);
+    this.scrollChatAlFinal();
+  }
+
+  // ✅ MÉTODO AGREGADO - Obtener el paso actual del flujo
   obtenerPasoActual(): number {
     const indices: { [key: string]: number } = {
       'nombre': 1,
@@ -503,56 +524,42 @@ export class App implements AfterViewInit, OnInit {
     return indices[this.estadoConversacion.paso] || 0;
   }
 
-  iniciarFlujoContacto(): void {
-    this.estadoConversacion = {
-      paso: 'nombre',
-      contexto: { tipo: 'contacto' }
-    };
+  procesarContactoInfo(respuesta: string): void {
+    const respuestaLower = respuesta.toLowerCase();
 
-    const mensajeBot: MensajeChat = {
-      texto: this.flujoContacto[0].pregunta,
-      esUsuario: false,
-      timestamp: new Date(),
-      tipo: 'texto'
-    };
-    this.mensajes.push(mensajeBot);
-  }
-
-  iniciarFlujoCotizacion(): void {
-    this.estadoConversacion = {
-      paso: 'nombre',
-      contexto: { tipo: 'cotizacion' }
-    };
-
-    const mensajeBot: MensajeChat = {
-      texto: '📋 Para darte una cotización precisa, necesito algunos datos:\n\n' + this.flujoContacto[0].pregunta,
-      esUsuario: false,
-      timestamp: new Date(),
-      tipo: 'texto'
-    };
-    this.mensajes.push(mensajeBot);
-  }
-
-  iniciarFlujoCurso(): void {
-    this.estadoConversacion = {
-      paso: 'nombre',
-      contexto: { tipo: 'curso' }
-    };
-
-    const mensajeBot: MensajeChat = {
-      texto: '🎓 Para inscribirte en el curso PLD, necesito tus datos:\n\n' + this.flujoContacto[0].pregunta,
-      esUsuario: false,
-      timestamp: new Date(),
-      tipo: 'texto'
-    };
-    this.mensajes.push(mensajeBot);
+    if (respuestaLower.includes('contact') || respuestaLower.includes('1')) {
+      this.iniciarFlujoContactoDatos();
+    } else {
+      this.cancelarFlujo();
+    }
+    this.scrollChatAlFinal();
   }
 
   procesarFlujoConversacional(respuesta: string): void {
     const pasoActual = this.estadoConversacion.paso;
     const contexto = this.estadoConversacion.contexto;
 
-    // Permitir cancelar el flujo
+    if (pasoActual === 'contacto_info') {
+      this.procesarContactoInfo(respuesta);
+      return;
+    }
+
+    if (pasoActual === 'confirmar_paquete') {
+      if (respuesta.toLowerCase() === 'si' || respuesta.toLowerCase() === 'sí') {
+        this.iniciarFlujoContactoDatos();
+      } else {
+        const mensajeBot: MensajeChat = {
+          texto: '👍 Entiendo. ¿En qué más puedo ayudarte?',
+          esUsuario: false,
+          timestamp: new Date(),
+          tipo: 'texto'
+        };
+        this.mensajes.push(mensajeBot);
+        this.estadoConversacion = { paso: 'inicio', contexto: {} };
+      }
+      return;
+    }
+
     if (respuesta.toLowerCase() === 'cancelar' || respuesta === '0') {
       this.cancelarFlujo();
       return;
@@ -566,7 +573,6 @@ export class App implements AfterViewInit, OnInit {
       return;
     }
 
-    // Validar la respuesta
     if (!this.validarRespuesta(respuesta, pasoInfo.validacion)) {
       const mensajeError: MensajeChat = {
         texto: '❌ Por favor, ingresa un ' + this.obtenerMensajeValidacion(pasoInfo.validacion),
@@ -578,10 +584,8 @@ export class App implements AfterViewInit, OnInit {
       return;
     }
 
-    // Guardar la respuesta
     contexto[pasoInfo.campo] = respuesta;
 
-    // Siguiente paso
     const indiceActual = this.flujoContacto.findIndex(p => p.paso === pasoActual);
     const siguientePaso = this.flujoContacto[indiceActual + 1];
 
@@ -657,10 +661,8 @@ export class App implements AfterViewInit, OnInit {
     };
     this.mensajes.push(mensajeBot);
 
-    // Reiniciar el flujo
     this.estadoConversacion = { paso: 'inicio', contexto: {} };
 
-    // Mostrar opciones nuevamente
     setTimeout(() => {
       const opcionesMsg: MensajeChat = {
         texto: 'Puedes elegir una opción:\n1️⃣ Ver PAQUETES\n2️⃣ Ver SERVICIOS\n3️⃣ Hablar con asesor\n4️⃣ Cotización\n5️⃣ Cursos PLD',
@@ -676,21 +678,17 @@ export class App implements AfterViewInit, OnInit {
   cancelarFlujo(): void {
     this.estadoConversacion = { paso: 'inicio', contexto: {} };
     const mensajeBot: MensajeChat = {
-      texto: '❌ Flujo cancelado. ¿En qué más puedo ayudarte?',
+      texto: '❌ Flujo cancelado. ¿En qué más puedo ayudarte?\n\n1️⃣ Ver PAQUETES\n2️⃣ Ver SERVICIOS\n3️⃣ Hablar con asesor\n4️⃣ Cotización\n5️⃣ Cursos PLD',
       esUsuario: false,
       timestamp: new Date(),
       tipo: 'texto'
     };
     this.mensajes.push(mensajeBot);
+    this.scrollChatAlFinal();
   }
-
-  // ============================================
-  // MÉTODOS DEL CHATBOT - ACCIONES
-  // ============================================
 
   guardarContacto(contexto: any): void {
     console.log('Contacto guardado:', contexto);
-    // Aquí puedes enviar a un API
   }
 
   enviarCotizacion(contexto: any): void {
@@ -701,99 +699,9 @@ export class App implements AfterViewInit, OnInit {
     console.log('Pre-inscripción curso:', contexto);
   }
 
-  seleccionarOpcionChat(accion: string): void {
-    let mensajeUsuario = '';
-
-    switch (accion) {
-      case 'paquetes':
-        mensajeUsuario = '1';
-        break;
-      case 'servicios':
-        mensajeUsuario = '2';
-        break;
-      case 'asesor':
-        mensajeUsuario = '3';
-        break;
-      case 'cotizacion':
-        mensajeUsuario = '4';
-        break;
-      case 'curso':
-        mensajeUsuario = '5';
-        break;
-      default:
-        mensajeUsuario = accion;
-    }
-
-    const mensajeUser: MensajeChat = {
-      texto: mensajeUsuario,
-      esUsuario: true,
-      timestamp: new Date(),
-      tipo: 'texto'
-    };
-    this.mensajes.push(mensajeUser);
-    this.scrollChatAlFinal();
-    this.chatbotEstaEscribiendo = true;
-
-    setTimeout(() => {
-      this.procesarRespuestaBot(mensajeUsuario);
-      this.chatbotEstaEscribiendo = false;
-      this.scrollChatAlFinal();
-    }, 800);
-  }
-
-  seleccionarOpcion(opcion: string, data?: any): void {
-    this.mensajeUsuario = opcion;
-    this.enviarMensaje();
-  }
-
-  seleccionarPaquete(paquete: PaqueteServicio): void {
-    const mensajeConfirmacion = `✨ Has seleccionado: ${paquete.nombre}\n\n💰 ${paquete.precio}\n📅 ${paquete.duracion}\n\n¿Deseas agendar una llamada con un asesor?\n\nResponde "si" o "no"`;
-
-    const mensajeBot: MensajeChat = {
-      texto: mensajeConfirmacion,
-      esUsuario: false,
-      timestamp: new Date(),
-      tipo: 'texto'
-    };
-    this.mensajes.push(mensajeBot);
-    this.scrollChatAlFinal();
-
-    // Iniciar flujo de confirmación
-    this.estadoConversacion = {
-      paso: 'confirmar_paquete',
-      contexto: { paquete: paquete, tipo: 'confirmacion_paquete' }
-    };
-  }
-
-  solicitarAsesor(): void {
-    const mensajeBot: MensajeChat = {
-      texto: '📞 Déjanos tus datos y te contactamos inmediatamente:\n\n📱 WhatsApp: (33) 19839037\n📧 Email: asesores@consultores1509.com\n\nO escribe "cancelar" para volver al menú.',
-      esUsuario: false,
-      timestamp: new Date(),
-      tipo: 'texto'
-    };
-    this.mensajes.push(mensajeBot);
-    this.scrollChatAlFinal();
-  }
-
-  // ============================================
-  // MÉTODOS DEL CHATBOT - UTILIDADES
-  // ============================================
-
-  scrollChatAlFinal(): void {
-    const chatContainer = document.querySelector('.chat-messages');
-    if (chatContainer) {
-      chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
-  }
-
-  formatearHora(fecha: Date): string {
-    return fecha.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
-  }
-
-  onKeyPress(event: KeyboardEvent): void {
-    if (event.key === 'Enter') {
-      this.enviarMensaje();
-    }
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (!this.isBrowser) return;
+    this.showFloatingBtn = window.scrollY > 800;
   }
 }
