@@ -204,6 +204,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.agruparServicios();
+
   }
 
   ngAfterViewInit(): void {
@@ -241,13 +242,16 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
 
 
-  agruparServicios(): void {
-    const serviciosRaw = this.items.find(i => i.type === 'servicios')?.servicios || [];
-    const TamañoGrupo = 3;
-    for (let i = 0; i < serviciosRaw.length; i += TamañoGrupo) {
-      this.serviciosAgrupados.push(serviciosRaw.slice(i, i + TamañoGrupo));
-    }
+agruparServicios(): void {
+  const serviciosRaw = this.items.find(i => i.type === 'servicios')?.servicios || [];
+  const TamañoGrupo = window.innerWidth < 768 ? 1 : 3; // 👈 cambia según tamaño
+  this.serviciosAgrupados = [];
+
+  for (let i = 0; i < serviciosRaw.length; i += TamañoGrupo) {
+    this.serviciosAgrupados.push(serviciosRaw.slice(i, i + TamañoGrupo));
   }
+}
+
 
   setupIntersectionObserver(): void {
     const sections = document.querySelectorAll('section');
@@ -286,9 +290,18 @@ export class HomeComponent implements AfterViewInit, OnInit {
     updateCounter();
   }
 
+  @HostListener('window:resize', [])
+onResize() {
+  this.serviciosAgrupados = [];
+  this.agruparServicios();
+}
+
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     if (!this.isBrowser) return;
     this.showFloatingBtn = window.scrollY > 800;
   }
 }
+
+

@@ -75,13 +75,14 @@
 /* OCULTAR ELEMENTOS CON HIDDEN (RÁPIDO)        */
 /* ============================================ */
 
-
 [hidden] {
   display: none !important;
 }
+
 /* ============================================ */
 /* TÍTULO DEL DIAGRAMA                          */
 /* ============================================ */
+
 .pildora-titulo-valores {
   background: rgb(10, 29, 48);
   border: 2px solid #ffffff;
@@ -121,7 +122,6 @@
   min-height: 300px;
 }
 
-
 /* ============================================ */
 /* VALORES SUPERIORES E INFERIORES              */
 /* TRANSICIONES RÁPIDAS CON CSS                 */
@@ -153,7 +153,7 @@
 
 .pildora {
   /* Gradiente con corte abrupto en 50% */
-  background: linear-gradient(180deg, #073547 0%, #093344 50%, #081624 50%, #081624 100%);
+  background: linear-gradient(180deg, #0f4e68 0%, #093e53 50%, #081624 50%, #081624 100%);
   border: 2px solid #ffffff;
   border-radius: 80px;
   padding: 15px 25px 15px 15px;
@@ -209,6 +209,7 @@
   position: relative;
 }
 
+/* Estilo para íconos FontAwesome */
 .icono-pildora i {
   font-size: 34px;
   background: linear-gradient(135deg, #d4af37, #ffffff);
@@ -217,6 +218,7 @@
   color: transparent;
 }
 
+/* Estilo para imágenes PNG */
 .icono-png {
   width: 50px;
   height: 50px;
@@ -246,7 +248,6 @@
   color: rgba(255, 255, 255, 0.88);
   margin: 0;
 }
-
 
 /* ============================================ */
 /* CÍRCULO CENTRAL (CLICKABLE)                  */
@@ -386,67 +387,14 @@
     width: 65px;
     height: 65px;
   }
-}
-
-/* Dispositivos Móviles (Celulares) */
-@media (max-width: 767px) {
-  /* Sección 1: El texto y la imagen se apilan verticalmente */
-  .seccion-texto-con-imagen {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .columna-texto,
-  .columna-imagen {
-    flex: none;
-    width: 100%;
-    position: static; /* Quita el sticky en móviles */
-  }
-
-  .titulo-principal {
-    font-size: 24px;
-    text-align: center;
-  }
-
-  .columna-texto p {
-    text-align: left; /* Evita espacios gigantes por el justificado */
-    text-indent: 0;   /* Quita la sangría para mejorar la lectura */
-  }
-
-  /* Título del Diagrama */
-  .pildora-titulo-valores {
-    padding: 10px 20px;
-    width: 90%;
-  }
-
-  .titulo-diagrama {
-    font-size: 18px;
-    letter-spacing: 1px;
-  }
-
-  /* Diagrama Interactivo y Píldoras */
-  .valores-superiores,
-  .valores-inferiores {
-    gap: 15px;
-    width: 100%;
-    padding: 0 10px;
-  }
-
-  .pildora {
-    width: 100%;       /* Ocupa el ancho disponible del celular */
-    min-width: 0;      /* Rompe la restricción anterior */
-    max-width: 100%;
-    padding: 12px;
-    gap: 12px;
-  }
-
-  .icono-pildora {
-    width: 55px;
-    height: 55px;
-  }
 
   .icono-pildora i {
-    font-size: 24px;
+    font-size: 28px;
+  }
+
+  .icono-png {
+    width: 42px;
+    height: 42px;
   }
 
   .contenido-pildora h3 {
@@ -454,23 +402,41 @@
   }
 
   .contenido-pildora p {
-    font-size: 11px;
+    font-size: 10px;
+  }
+}
+
+/* Tablet vertical y móviles grandes */
+@media (max-width: 800px) {
+  .seccion-texto-con-imagen {
+    flex-direction: column;
   }
 
-  /* Círculo Central adaptable */
+  .columna-imagen {
+    position: static;
+    order: -1;
+    margin-bottom: 20px;
+  }
+
+  .titulo-principal {
+    text-align: center;
+  }
+
+  .valores-superiores,
+  .valores-inferiores {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
   .circulo-central-grande {
     width: 130px;
     height: 130px;
   }
 
   .diagrama-interactivo.agrupado .circulo-central-grande {
-    width: 150px;
-    height: 150px;
-  }
-
-  .circulo-interno-blanco {
-    width: 80px;
-    height: 80px;
+    width: 160px;
+    height: 160px;
   }
 
   .diagrama-interactivo.agrupado .circulo-interno-blanco {
@@ -478,9 +444,112 @@
     height: 135px;
   }
 
-  .circulo-interno-blanco img,
   .diagrama-interactivo.agrupado .circulo-interno-blanco img {
-    width: 100%;
-    height: 100%;
+    width: 100px;
   }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  .pildora {
+    flex-direction: column;
+    text-align: center;
+    width: 280px;
+    padding: 20px;
+  }
+
+  .contenido-pildora {
+    text-align: center;
+  }
+
+  .icono-pildora {
+    width: 70px;
+    height: 70px;
+  }
+
+  .icono-pildora i {
+    font-size: 30px;
+  }
+
+  .icono-png {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .sobre-nosotros-container {
+    padding: 20px 15px;
+  }
+
+  .titulo-principal {
+    font-size: 22px;
+  }
+
+  .columna-texto p {
+    font-size: 12px;
+    text-indent: 20px;
+  }
+
+  .pildora-titulo-valores {
+    padding: 8px 20px;
+  }
+
+  .titulo-diagrama {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .pildora {
+    width: 260px;
+    padding: 15px;
+  }
+
+  .icono-pildora {
+    width: 60px;
+    height: 60px;
+  }
+
+  .icono-pildora i {
+    font-size: 26px;
+  }
+
+  .icono-png {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* ✅ Ajuste para mantener el logo circular */
+  .circulo-central-grande {
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+  }
+
+  .circulo-interno-blanco {
+    width: 90px;
+    height: 90px;
+  }
+
+  .circulo-interno-blanco img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+
+  /* ✅ Estado agrupado: usa scale en lugar de cambiar dimensiones */
+  .diagrama-interactivo.agrupado .circulo-central-grande {
+    transform: scale(1.15);
+  }
+
+  .diagrama-interactivo.agrupado .circulo-interno-blanco {
+    transform: scale(1.1);
+  }
+
+  .mensaje-agrupado p {
+    font-size: 12px;
+  }
+
 }

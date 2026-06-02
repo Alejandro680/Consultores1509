@@ -178,14 +178,29 @@ closeMenu() {
       this.chatInicializado = true;
     }
   }
+ngAfterViewInit() {
+  const toggler = document.querySelector('.navbar-toggler');
+  const navbarCollapse = document.getElementById('navbarNav');
+  const navLinks = document.querySelectorAll('.nav-link');
 
-  ngAfterViewInit(): void {
-    if (this.isBrowser) {
-      setTimeout(() => {
-        this.detectarElementosVisibles();
-      }, 100);
+  // Toggle con hidden
+  toggler?.addEventListener('click', () => {
+    if (navbarCollapse) {
+      navbarCollapse.hidden = !navbarCollapse.hidden;
     }
-  }
+  });
+
+  // Cierre automático al hacer clic en un enlace
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (navbarCollapse) {
+        navbarCollapse.hidden = true;
+      }
+    });
+  });
+}
+
+
 
   ngOnDestroy(): void {
     if (this.observer) {

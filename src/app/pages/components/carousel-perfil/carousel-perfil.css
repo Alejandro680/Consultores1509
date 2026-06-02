@@ -194,9 +194,9 @@
   background: #c9a53b;
 }
 
-/* ==========================================================================
-   VERSION RESPONSIVE CORREGIDA - UNO POR UNO EN MÓVILES
-   ========================================================================== */
+/* ============================================ */
+/* RESPONSIVE                                   */
+/* ============================================ */
 
 @media (max-width: 800px) {
   .tarjetas-grid {
@@ -220,49 +220,28 @@
   }
 }
 
-/* REEMPLAZAR COMPLETAMENTE TU REGLA DE 650px POR ESTA */
 @media (max-width: 650px) {
-  /* 1. Forzamos un flujo horizontal estricto sin saltos de línea */
   .tarjetas-grid {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    gap: 0 !important; /* Eliminamos el espacio intermedio para centrado perfecto */
-    width: 100% !important;
+    flex-direction: column;
+    align-items: center;
   }
 
-  /* 2. Cada tarjeta ocupará exactamente TODO el espacio disponible del slide */
   .tarjeta-perfil {
-    flex: 0 0 100% !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    border: 6px solid #0a2f4a; /* Reducimos el grosor del borde en pantallas chicas */
+    width: 90%;
+    max-width: 320px;
   }
 
-  .tarjeta-perfil:hover {
-    border: 6px solid #c9a53b;
-    transform: none; /* Evitamos saltos raros de layout al presionar en pantallas táctiles */
-  }
-
-  /* 3. Ajustamos el contenedor de la imagen para que sea responsivo */
-  .tarjeta-imagen {
-    height: 260px;
-  }
-
-  /* 4. Reposicionamos los botones flotantes para que no tapen el contenido */
   .carrusel-btn {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     font-size: 12px;
-    background: rgba(255, 255, 255, 0.9); /* Un toque translúcido */
   }
 
   .carrusel-btn.prev {
-    left: 5px; /* Los metemos sutilmente adentro del contenedor */
+    left: -8px;
   }
 
   .carrusel-btn.next {
-    right: 5px;
+    right: -8px;
   }
 }

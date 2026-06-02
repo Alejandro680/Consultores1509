@@ -178,7 +178,6 @@
                     <p class="proceso-texto">{{ step.desc }}</p>
                   </div>
                 }
-
               </div>
 
               <!-- Botón inferior de atajo al chatbot -->
@@ -195,5 +194,16 @@
         }
       </section>
     }
-  </div>
+    <!-- Botón flotante de cursos -->
+            <div class="floating-course-btn shadow-lg d-none d-md-flex" [class.visible]="showFloatingBtn">
+              <div class="btn-icon">
+                <img src="assets/ICONO 4-01.png" alt="Icono PLD">
+              </div>
+              <div class="btn-content text-center">
+                <span class="btn-title">CURSO PLD</span>
+                <span class="btn-subtitle">PRESENCIAL Y VIA ZOOM</span>
+                <a href="#cursos" class="btn-action" (click)="scrollToCursos($event)">CLICK AQUÍ</a>
+              </div>
+            </div>
+            </div>
 </div>

@@ -18,6 +18,7 @@
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
 }
 
+
 .navbar-brand img {
   height: 115px;
   width: auto;
@@ -42,19 +43,57 @@
   color: #ffc107;
 }
 
+
 main {
   flex: 1;
   margin-top: 130px;
+  overflow-y: hidden;
   min-height: calc(100vh - 130px);
 }
 
+.navbar-collapse {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform-origin: top;
+}
+
+.navbar-collapse[hidden] {
+  opacity: 0;
+  transform: scaleY(0.9);
+  pointer-events: none;
+}
+
+.navbar-collapse:not([hidden]) {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+
+
+
 .sobre-nosotros {
-  min-height: 500px;
+  min-height: 500px;  /* Fuerza altura mínima */
   padding-bottom: 3rem;
 }
 
+@media (max-width: 767px) {
+  .navbar {
+    padding: 0.4rem 1rem;
+    border-radius: 0;
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
+  .navbar-brand img {
+    height: 80px;
+  }
+}
+
 /* ============================================
-   2. FOOTER (Mantiene 100% tus estilos)
+   2. FOOTER
    ============================================ */
 .divider-section {
   background-color: #081624;
@@ -89,7 +128,8 @@ main {
   margin-bottom: 25px;
 }
 
-/* Base de enlaces - El ancho máximo evita que se deformen */
+
+
 .contact-link, .social-icon {
   color: white;
   text-decoration: none;
@@ -99,8 +139,6 @@ main {
   gap: 12px;
   margin-bottom: 15px;
   font-size: 1rem;
-  text-align: left;
-  max-width: 100%;
 }
 
 .contact-link:hover, .social-icon:hover {
@@ -116,7 +154,6 @@ main {
   display: flex;
   gap: 20px;
   font-size: 1.3rem;
-  flex-wrap: wrap;
 }
 
 .footer-logo-column {
@@ -154,6 +191,32 @@ main {
   font-size: 1.1rem;
   font-weight: 600;
 }
+
+@media (max-width: 767px) {
+  .social-icons-wrapper,
+  .d-flex.gap-3.fs-4 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .social-icon {
+    font-size: 1.6rem;
+    margin: 0 10px;
+  }
+
+  .footer-logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-legal h4 {
+    text-align: center;
+  }
+}
+
 
 /* ============================================
    3. BOTÓN FLOTANTE DE CURSOS
@@ -196,7 +259,6 @@ main {
   justify-content: center;
   margin-right: 15px;
   margin-top: 7px;
-  flex-shrink: 0;
 }
 
 .floating-course-btn .btn-icon img {
@@ -274,7 +336,6 @@ main {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  flex-shrink: 0;
 }
 
 .chatbot-float-btn .chatbot-icon i {
@@ -285,6 +346,7 @@ main {
 
 .chatbot-content {
   text-align: center;
+  transition: all 0.3s ease;
 }
 
 .chatbot-title {
@@ -356,6 +418,7 @@ main {
   opacity: 1;
 }
 
+/* Header del chatbot */
 .chatbot-header {
   background: linear-gradient(135deg, #10253d 0%, #1a4a5c 100%);
   color: white;
@@ -412,6 +475,7 @@ main {
   transform: rotate(90deg);
 }
 
+/* Área de mensajes */
 .chat-messages {
   flex: 1;
   overflow-y: auto;
@@ -422,6 +486,7 @@ main {
   gap: 12px;
 }
 
+/* Mensajes */
 .message-wrapper {
   display: flex;
   gap: 10px;
@@ -429,89 +494,543 @@ main {
 }
 
 @keyframes slideIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+.message-wrapper.user-message {
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.user-message .message-avatar {
+  background: #10253d;
+  color: white;
+}
+
+.bot-message .message-avatar {
+  background: #ffcf33;
+  color: #10253d;
+}
+
+.message-content {
+  max-width: 70%;
+  flex: 1;
+}
+
+.user-message .message-content {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.message-bubble {
+  background: white;
+  padding: 10px 14px;
+  border-radius: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.user-message .message-bubble {
+  background: #10253d;
+  color: white;
+}
+
+.message-text {
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.message-time {
+  font-size: 10px;
+  margin-top: 5px;
+  opacity: 0.6;
+  text-align: right;
+}
+
+/* Paquetes en el chat */
+.paquetes-container {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.paquete-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 1px solid #e9ecef;
+}
+
+.paquete-card:hover {
+  transform: translateX(5px);
+  border-color: #ffcf33;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.paquete-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.paquete-card h5 {
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.paquete-card p {
+  font-size: 11px;
+  margin: 0 0 8px 0;
+  color: #6c757d;
+}
+
+.paquete-precio {
+  font-size: 14px;
+  font-weight: bold;
+  color: #10253d;
+  margin: 5px 0;
+}
+
+.paquete-duracion {
+  font-size: 10px;
+  color: #6c757d;
+  margin-bottom: 8px;
+}
+
+.btn-paquete {
+  width: 100%;
+  background: #10253d;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 8px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-paquete:hover {
+  background: #ffcf33;
+  color: #10253d;
+}
+
+/* Servicios en el chat */
+.servicios-chat {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.servicio-chat-item {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 1px solid #e9ecef;
+}
+
+.servicio-chat-item:hover {
+  background: #f8f9fa;
+  transform: translateX(5px);
+}
+
+.servicio-chat-item i:first-child {
+  font-size: 18px;
+  color: #10253d;
+}
+
+.servicio-chat-item div {
+  flex: 1;
+}
+
+.servicio-chat-item strong {
+  display: block;
+  font-size: 12px;
+}
+
+.servicio-chat-item small {
+  font-size: 10px;
+  color: #6c757d;
+}
+
+/* Opciones clickeables del chat */
+.opciones-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.opcion-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.opcion-btn:hover {
+  background: #10253d;
+  border-color: #ffcf33;
+  transform: translateX(5px);
+}
+
+.opcion-btn:hover .opcion-texto {
+  color: white;
+}
+
+.opcion-icono {
+  font-size: 24px;
+}
+
+.opcion-numero {
+  background: #10253d;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.opcion-btn:hover .opcion-numero {
+  background: #ffcf33;
+  color: #10253d;
+}
+
+.opcion-texto {
+  flex: 1;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.opcion-btn i {
+  color: #10253d;
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+.opcion-btn:hover i {
+  opacity: 1;
+  transform: translateX(3px);
+  color: #ffcf33;
+}
+
+/* Indicador de escritura */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 15px;
+  width: fit-content;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.typing-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10253d;
+  animation: typing 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-8px);
+  }
+}
+
+.typing-text {
+  font-size: 11px;
+  color: #6c757d;
+}
+
+/* Input del chatbot */
+.chatbot-input {
+  padding: 12px;
+  background: white;
+  border-top: 1px solid #e9ecef;
+}
+
+.input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 25px;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.chat-input:focus {
+  border-color: #10253d;
+}
+
+.send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #10253d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.send-btn:hover:not(:disabled) {
+  background: #ffcf33;
+  transform: scale(1.1);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Acciones rápidas */
+.chatbot-quick-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.quick-action-btn {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #10253d;
+}
+
+.quick-action-btn:hover {
+  background: #10253d;
+  color: white;
+  border-color: #10253d;
+}
 
 /* ============================================
-   6. SECCIÓN RESPONSIVE EXCLUSIVA MÓVIL
+   6. UTILIDADES GENERALES
+   ============================================ */
+body {
+  padding-top: 0;
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
+#servicesCarousel .carousel-item {
+  transition: transform 0.6s ease-in-out;
+}
+
+/* ============================================
+   7. RESPONSIVE
    ============================================ */
 @media (max-width: 767px) {
-  /* Control Navbar */
-  .navbar {
-    padding: 0.5rem 1rem;
-  }
-
-  .navbar-brand img {
-    height: 70px; /* Reducción óptima para celulares */
-  }
-
-  .nav-link {
-    font-size: 1.1rem;
-    margin-left: 0;
-    padding: 0.6rem 0;
-    text-align: center;
-  }
-
-  main {
-    margin-top: 85px;
-    min-height: calc(100vh - 85px);
-  }
-
-  /* Blindaje del Footer e Íconos */
   .footer-legal {
-    padding-top: 45px;
-    padding-bottom: 40px;
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .footer-legal h4,
+  .contact-link,
+  .address-block,
+  .copyright-block {
+    text-align: center !important;
+    justify-content: center;
+  }
+
+  .address-block {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-legal {
     text-align: center;
   }
 
-  /* Evita que las columnas se empujen mal; las fuerza a listarse hacia abajo */
-  .footer-legal .row,
-  .footer-legal [class*="col-"] {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100% !important;
-    max-width: 100% !important;
+  .text-md-end {
     text-align: center !important;
   }
 
-  /* SEGURO PARA QUE NO SE DESFACEN LOS ÍCONOS DE CONTACTO */
-  .contact-link, .social-icon {
-    justify-content: center;
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-    gap: 10px; /* Separación fija ícono-texto */
+  .footer-logo {
+    margin: 20px 0;
   }
 
-  /* Centrado de la caja de redes sociales */
-  .social-icons-wrapper {
-    justify-content: center;
-    gap: 25px;
+  .chatbot-window {
+    width: calc(100vw - 40px);
+    height: calc(100vh - 120px);
+    bottom: 100px;
+    left: 20px;
+    right: 20px;
   }
 
-  .address-block,
-  .copyright-block {
-    text-align: center !important; /* Desactiva el text-align: right de PC */
-    margin-bottom: 25px;
-  }
+  /* ============================================
+   CHATBOT RESPONSIVO
+   ============================================ */
 
-  .copyright-block {
-    margin-bottom: 0;
-  }
-
-  /* Rediseño de Botones Flotantes Inferiores para pantallas táctiles */
-  .floating-course-btn,
+/* Tablets y móviles grandes */
+@media (max-width: 992px) {
   .chatbot-float-btn {
-    bottom: 12px;
-    padding: 8px 14px;
-    max-width: 46%; /* Evita colisión mutua */
+    bottom: 80px;
+    padding: 8px 12px;
+    gap: 8px;
   }
 
-  /* Botón de cursos compacto */
-  .floating-course-btn {
+  .chatbot-float-btn .chatbot-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .chatbot-float-btn .chatbot-icon i {
+    font-size: 22px;
+  }
+
+  .chatbot-title {
+    font-size: 0.85rem;
+  }
+
+  .chatbot-subtitle {
+    font-size: 0.55rem;
+  }
+
+  .chatbot-window {
+    width: calc(100vw - 60px);
+    height: calc(100vh - 140px);
+    left: 30px;
+    bottom: 90px;
   }
 }
+
+/* Móviles medianos */
+@media (max-width: 768px) {
+  .chatbot-float-btn {
+    bottom: 70px;
+    padding: 6px 10px;
+  }
+
+  .chatbot-float-btn .chatbot-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .chatbot-float-btn .chatbot-icon i {
+    font-size: 20px;
+  }
+
+  .chatbot-title {
+    font-size: 0.8rem;
+  }
+
+  .chatbot-subtitle {
+    font-size: 0.5rem;
+  }
+
+  .chatbot-window {
+    width: calc(100vw - 40px);
+    height: calc(100vh - 120px);
+    left: 20px;
+    bottom: 80px;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .chatbot-float-btn {
+    bottom: 60px;
+    padding: 5px 8px;
+    gap: 6px;
+  }
+
+  .chatbot-float-btn .chatbot-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .chatbot-float-btn .chatbot-icon i {
+    font-size: 18px;
+  }
+
+  .chatbot-title {
+    font-size: 0.75rem;
+  }
+
+  .chatbot-subtitle {
+    font-size: 0.45rem;
+  }
+
+  .chatbot-window {
+    width: calc(100vw - 30px);
+    height: calc(100vh - 100px);
+    left: 15px;
+    bottom: 70px;
+  }
+}
+
+}
+
+
