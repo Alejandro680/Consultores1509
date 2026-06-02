@@ -1,5 +1,13 @@
 /* ============================================
-   1. NAVBAR
+   1. VARIABLES GLOBALES
+   ============================================ */
+:root {
+  --transition-default: all 0.3s ease;
+  --shadow-default: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   2. NAVBAR
    ============================================ */
 .navbar {
   background-color: #01202cee;
@@ -17,7 +25,6 @@
   margin-top: 100px !important;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
 }
-
 
 .navbar-brand img {
   height: 115px;
@@ -43,7 +50,6 @@
   color: #ffc107;
 }
 
-
 main {
   flex: 1;
   margin-top: 130px;
@@ -67,14 +73,12 @@ main {
   transform: scaleY(1);
 }
 
-
-
-
 .sobre-nosotros {
-  min-height: 500px;  /* Fuerza altura mínima */
+  min-height: 500px;
   padding-bottom: 3rem;
 }
 
+/* Navbar Responsive */
 @media (max-width: 767px) {
   .navbar {
     padding: 0.4rem 1rem;
@@ -93,7 +97,7 @@ main {
 }
 
 /* ============================================
-   2. FOOTER
+   3. FOOTER
    ============================================ */
 .divider-section {
   background-color: #081624;
@@ -127,8 +131,6 @@ main {
   font-size: 1.1rem;
   margin-bottom: 25px;
 }
-
-
 
 .contact-link, .social-icon {
   color: white;
@@ -192,7 +194,26 @@ main {
   font-weight: 600;
 }
 
+/* Footer Responsive */
 @media (max-width: 767px) {
+  .footer-legal {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .footer-legal h4,
+  .contact-link,
+  .address-block,
+  .copyright-block {
+    text-align: center !important;
+    justify-content: center;
+  }
+
+  .address-block {
+    margin-top: 30px;
+  }
+
   .social-icons-wrapper,
   .d-flex.gap-3.fs-4 {
     justify-content: center;
@@ -212,14 +233,17 @@ main {
     align-items: center;
   }
 
-  .footer-legal h4 {
-    text-align: center;
+  .footer-logo {
+    margin: 20px 0;
+  }
+
+  .text-md-end {
+    text-align: center !important;
   }
 }
 
-
 /* ============================================
-   3. BOTÓN FLOTANTE DE CURSOS
+   4. BOTÓN FLOTANTE DE CURSOS
    ============================================ */
 .floating-course-btn {
   position: fixed;
@@ -291,7 +315,7 @@ main {
 }
 
 /* ============================================
-   4. CHATBOT - BOTÓN FLOTANTE
+   5. CHATBOT - BOTÓN FLOTANTE
    ============================================ */
 .chatbot-float-btn {
   position: fixed;
@@ -392,7 +416,7 @@ main {
 }
 
 /* ============================================
-   5. CHATBOT - VENTANA
+   6. CHATBOT - VENTANA
    ============================================ */
 .chatbot-window {
   position: fixed;
@@ -871,68 +895,8 @@ main {
 }
 
 /* ============================================
-   6. UTILIDADES GENERALES
+   7. CHATBOT RESPONSIVE (UNIFICADO)
    ============================================ */
-body {
-  padding-top: 0;
-}
-
-section {
-  scroll-margin-top: 100px;
-}
-
-#servicesCarousel .carousel-item {
-  transition: transform 0.6s ease-in-out;
-}
-
-/* ============================================
-   7. RESPONSIVE
-   ============================================ */
-@media (max-width: 767px) {
-  .footer-legal {
-    text-align: center;
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-
-  .footer-legal h4,
-  .contact-link,
-  .address-block,
-  .copyright-block {
-    text-align: center !important;
-    justify-content: center;
-  }
-
-  .address-block {
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .footer-legal {
-    text-align: center;
-  }
-
-  .text-md-end {
-    text-align: center !important;
-  }
-
-  .footer-logo {
-    margin: 20px 0;
-  }
-
-  .chatbot-window {
-    width: calc(100vw - 40px);
-    height: calc(100vh - 120px);
-    bottom: 100px;
-    left: 20px;
-    right: 20px;
-  }
-
-  /* ============================================
-   CHATBOT RESPONSIVO
-   ============================================ */
-
 /* Tablets y móviles grandes */
 @media (max-width: 992px) {
   .chatbot-float-btn {
@@ -1031,6 +995,216 @@ section {
   }
 }
 
+/* ============================================
+   8. UTILIDADES GENERALES
+   ============================================ */
+body {
+  padding-top: 0;
 }
 
+section {
+  scroll-margin-top: 100px;
+}
 
+#servicesCarousel .carousel-item {
+  transition: transform 0.6s ease-in-out;
+}
+
+/* ============================================
+   9. PROCESO DE DEMANDA
+   ============================================ */
+.proceso-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.proceso-paso {
+  flex: 1;
+  min-width: 160px;
+  text-align: center;
+  padding: 20px 15px;
+  background: #ffffff;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.proceso-paso:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.proceso-circulo-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.proceso-numero {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f7b217;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.proceso-icono {
+  width: 90px;
+  height: 90px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #e9ecef;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.proceso-paso:hover .proceso-icono {
+  border-color: #f7b217;
+  transform: scale(1.05);
+}
+
+.proceso-icono i {
+  font-size: 38px;
+  color: #10253d;
+  transition: all 0.3s ease;
+}
+
+.proceso-paso:hover .proceso-icono i {
+  color: #f7b217;
+}
+
+.proceso-titulo {
+  font-size: 15px;
+  font-weight: bold;
+  color: #10253d;
+  margin: 15px 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.proceso-texto {
+  font-size: 12px;
+  color: #6c757d;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0 10px;
+}
+
+/* Proceso Responsive */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .proceso-wrapper {
+    gap: 15px;
+  }
+  .proceso-paso {
+    min-width: 140px;
+    padding: 15px 10px;
+  }
+  .proceso-icono {
+    width: 75px;
+    height: 75px;
+  }
+  .proceso-icono i {
+    font-size: 32px;
+  }
+  .proceso-titulo {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 576px) {
+  .proceso-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .proceso-paso {
+    min-width: auto;
+  }
+  .proceso-icono {
+    width: 70px;
+    height: 70px;
+  }
+  .proceso-icono i {
+    font-size: 28px;
+  }
+  .proceso-numero {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 575px) {
+  .proceso-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  .proceso-paso {
+    padding: 12px 8px;
+  }
+  .proceso-icono {
+    width: 60px;
+    height: 60px;
+  }
+  .proceso-icono i {
+    font-size: 24px;
+  }
+  .proceso-titulo {
+    font-size: 11px;
+  }
+  .proceso-texto {
+    display: none;
+  }
+}
+
+@media (max-width: 374px) {
+  .proceso-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .proceso-paso {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 15px;
+  }
+  .proceso-circulo-wrapper {
+    margin-bottom: 0;
+  }
+  .proceso-icono {
+    width: 55px;
+    height: 55px;
+  }
+  .proceso-icono i {
+    font-size: 22px;
+  }
+  .proceso-titulo {
+    margin: 0 0 5px 0;
+  }
+  .proceso-texto {
+    display: block;
+    font-size: 10px;
+  }
+}

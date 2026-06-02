@@ -43,7 +43,7 @@
   <!-- Secciones del detector de desplazamiento (ScrollSpy) -->
   <div id="spyNav" class="scrollspy-example mt-5 pt-5">
     @for (item of items; track item.id) {
-      <section [id]="item.id" class="container my-5">
+      <section [id]="item.id" class="container my-5" section-instant>
         <div class="text-center mb-4">
           <h2 class="fw-bold">{{ item.label }}</h2>
         </div>
@@ -152,7 +152,7 @@
               </div>
               <div class="col-lg-6 mt-4 mt-lg-0">
                 <div class="video-placeholder shadow-lg">
-                  <img src="assets/placeholder-video.png" class="img-fluid rounded" alt="Video curso">
+                  <video src="Videos/cursoLPDPresentacion.mp4" controls alt="mp4"></video>
                 </div>
               </div>
             </div>
@@ -184,11 +184,10 @@
               <div class="proceso-boton-wrapper text-center mt-5">
                 <button
                   type="button"
-                  class="btn btn-contacto text-uppercase fw-bold"
-                  (click)=" abrirChatDirectoWhatsapp()">
-                  {{ item.content?.button || 'CONTACTO' }}
+                  class="btn btn-contacto text-uppercase fw-bold" onclick="window.open('https://wa.me/523319839037', '_blank')">CONTACTO
                 </button>
               </div>
+
             </div>
           </div>
         }

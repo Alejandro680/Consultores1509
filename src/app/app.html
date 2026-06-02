@@ -1,22 +1,23 @@
-  <nav id="navbar-example" class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="LOGO CONSULTORES-01.png" alt="1509 Consultores" height="100" class="me-2">
-    </a>
-    <button class="navbar-toggler" type="button" aria-label="Menu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse" id="navbarNav" hidden>
-      <ul class="navbar-nav ms-auto">
-        @for (item of navItems; track item.id) {
-          <li class="nav-item">
-            <a class="nav-link" [attr.href]="'#' + item.id">{{ item.navLabel }}</a>
-          </li>
-        }
-      </ul>
-    </div>
-  </div>
-</nav>
+  <!-- Navbar fijo -->
+    <nav id="navbar-example" class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="LOGO CONSULTORES-01.png" alt="1509 Consultores" height="100" class="me-2">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            @for (item of navItems; track item.id) {
+              <li class="nav-item">
+                <a class="nav-link" [attr.href]="'#' + item.id"  (click)="cerrarMenuMovil()">{{ item.navLabel }}</a>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     <main>
       <router-outlet></router-outlet>

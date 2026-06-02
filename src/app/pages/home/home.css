@@ -3,7 +3,6 @@
    ============================================ */
 #mainCarousel {
   border-radius: 20px;
-  box-shadow: var(--shadow-default);
   overflow: hidden;
 }
 
@@ -31,16 +30,15 @@
    2. SECCIONES Y SCROLLSPY
    ============================================ */
 html {
-  scroll-padding-top: 180px;
+  scroll-padding-top: 145px;
   scroll-behavior: smooth;
-
 }
 
 section {
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.8s ease-out;
-  scroll-margin-top: 180px;
+  scroll-margin-top: 145px;
 }
 
 section.is-visible {
@@ -52,6 +50,35 @@ section.is-visible {
   transition: opacity 0.4s ease-in !important;
   opacity: 1 !important;
   transform: translateY(0) !important;
+}
+
+/* Modal */
+.modal {
+  z-index: 1060 !important;
+}
+
+.modal-backdrop {
+  z-index: 1050 !important;
+  background-color: rgba(1, 32, 44, 0.6);
+}
+
+/* Botón CONTACTO */
+.btn-contacto {
+  background-color: #01202c;
+  color: #ffffff;
+  padding: 10px 35px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-contacto:hover {
+  background-color: #ffcf33;
+  color: #01202c;
+  transform: translateY(-2px);
 }
 
 /* ============================================
@@ -212,6 +239,24 @@ section.is-visible {
   opacity: 0.3;
 }
 
+.video-placeholder {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.video-placeholder video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 /* ============================================
    6. SERVICIOS (Tarjetas y Carrusel)
    ============================================ */
@@ -331,44 +376,36 @@ section.is-visible {
   width: 5%;
 }
 
-/* ==========================================================================
-   AJUSTE DE CARRUSEL DE SERVICIOS PARA PANTALLAS CHICAS (MÓVILES)
-   ========================================================================== */
+/* Carrusel móvil - scroll horizontal */
 @media (max-width: 767.98px) {
-
-  /* 1. Forzamos a la fila a comportarse como una tira horizontal continua */
   .carrusel-movil-ajuste {
     display: flex !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
-    scroll-snap-type: x mandatory; /* Hace que el deslizamiento se detenga exactamente en cada tarjeta */
-    -webkit-overflow-scrolling: touch; /* Suaviza el scroll en dispositivos iOS */
-    padding-bottom: 20px; /* Espacio extra para que no se corten las sombras de las tarjetas */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px;
   }
 
-  /* Oculta la barra de scroll inferior para mantener una interfaz limpia */
   .carrusel-movil-ajuste::-webkit-scrollbar {
     display: none;
   }
 
-  /* 2. Forzamos a cada tarjeta a ocupar el 100% del ancho del dispositivo visual */
   .carrusel-movil-ajuste .col-12 {
     flex: 0 0 100% !important;
     max-width: 100% !important;
-    scroll-snap-align: center; /* Centra la tarjeta en la pantalla al deslizar */
+    scroll-snap-align: center;
     padding-left: 15px;
     padding-right: 15px;
   }
 
-  /* Ajuste opcional para reducir tamaños de fuentes si los títulos son muy largos */
   .service-title {
     font-size: 1.25rem !important;
   }
 }
 
-
 /* ============================================
-   7. CURSOS
+   7. CURSOS Y BOTÓN FLOTANTE
    ============================================ */
 .curso-container {
   background-color: #10253d;
@@ -385,7 +422,6 @@ section.is-visible {
   font-size: 1.0rem;
 }
 
-/* Botón Flotante Cursos */
 .floating-course-btn {
   position: fixed;
   bottom: 100px;
@@ -455,138 +491,9 @@ section.is-visible {
   display: inline-block;
 }
 
-/* ======== RESPONSIVE PROCESO DE DEMANDA ======== */
-.proceso-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.proceso-paso {
-  text-align: center;
-  flex: 1;
-  min-width: 150px;
-  position: relative;
-}
-
-.proceso-circulo-wrapper {
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.proceso-numero {
-  background-color: #f7b217;
-  color: white;
-  font-weight: bold;
-  font-size: 0.9rem;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8px;
-}
-
-.proceso-icono {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 3px solid #e9ecef;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  transition: all 0.3s ease;
-}
-
-.proceso-icono i {
-  font-size: 1.8rem;
-  color: #10253d;
-}
-
-.proceso-titulo {
-  font-weight: 700;
-  color: #10253d;
-  text-transform: uppercase;
-  margin-top: 10px;
-  font-size: 0.9rem;
-}
-
-.proceso-texto {
-  font-size: 0.8rem;
-  color: #6c757d;
-  line-height: 1.4;
-}
-
-/* ======== MÓVILES ======== */
-@media (max-width: 767px) {
-  .proceso-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .proceso-paso {
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 30px;
-  }
-
-  .proceso-icono {
-    width: 70px;
-    height: 70px;
-  }
-
-  .proceso-icono i {
-    font-size: 1.5rem;
-  }
-
-  .proceso-numero {
-    margin-bottom: 5px;
-  }
-
-  .proceso-titulo {
-    font-size: 1rem;
-  }
-
-  .proceso-texto {
-    font-size: 0.85rem;
-  }
-}
 /* ============================================
-   9. TÍTULOS
+   8. PROCESO DE DEMANDA (FLUJO DE TIEMPO)
    ============================================ */
-h2 {
-  position: relative;
-  display: inline-block;
-}
-
-/* ============================================
-   10. ANIMACIONES
-   ============================================ */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate__fadeIn {
-  animation: fadeIn 0.5s;
-}
-
-/* ============================================ */
-/* 8. FLUJO DE PROCESO (LÍNEA DE TIEMPO)        */
-/* ============================================ */
 .proceso-wrapper {
   display: flex;
   flex-direction: row;
@@ -597,7 +504,6 @@ h2 {
   padding: 20px 0;
 }
 
-/* Línea conectora gris idéntica a tu imagen de muestra */
 .proceso-wrapper::before {
   content: '';
   position: absolute;
@@ -618,13 +524,14 @@ h2 {
   position: relative;
   z-index: 2;
   padding: 0 5px;
+  min-width: 150px;
 }
 
 .proceso-circulo-wrapper {
   position: relative;
   width: 110px;
   height: 110px;
-  background-color: #f8f9fa; /* Cubre la línea de fondo con el color de la sección */
+  background-color: #f8f9fa;
   border: 2px solid #e2e8f0;
   border-radius: 50%;
   display: flex;
@@ -638,7 +545,7 @@ h2 {
   top: -8px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #ffcf33; /* Tu color amarillo */
+  background-color: #ffcf33;
   color: #01202c;
   width: 24px;
   height: 24px;
@@ -659,7 +566,6 @@ h2 {
   height: 100%;
 }
 
-/* Alineación exacta para los iconos de fuente FontAwesome */
 .proceso-icono i {
   font-size: 2.2rem;
   color: #01202c;
@@ -686,38 +592,16 @@ h2 {
   max-width: 140px;
 }
 
-.btn-contacto {
-  background-color: #01202c;
-  color: #ffffff;
-  padding: 10px 35px;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.btn-contacto:hover {
-  background-color: #ffcf33;
-  color: #01202c;
-  transform: translateY(-2px);
-}
-
 .proceso-icono .text-primary-dark {
   color: #01202c !important;
 }
 
-
 .proceso-icono .text-primary {
-  color: #1a5a96 !important; /* Tono azul corporativo de tu muestra */
+  color: #1a5a96 !important;
 }
 
-/* ==========================================================================
-   9. AJUSTE PARA PANTALLAS MÓVILES (CELULARES) - SECCIÓN PROCESO
-   ========================================================================== */
+/* Proceso - Móviles */
 @media (max-width: 767.98px) {
-  /* Línea de Tiempo del Proceso Móvil */
   .proceso-wrapper {
     flex-direction: column;
     align-items: center;
@@ -725,7 +609,6 @@ h2 {
     padding: 10px 0;
   }
 
-  /* La línea conectora horizontal gira 90 grados para volverse vertical y centrarse */
   .proceso-wrapper::before {
     top: 20px;
     bottom: 20px;
@@ -753,10 +636,8 @@ h2 {
 }
 
 /* ============================================
-   10. CHATBOT - PAQUETES Y PLANES DE SERVICIO
+   9. CHATBOT - PAQUETES Y PLANES DE SERVICIO
    ============================================ */
-
-/* Contenedor que agrupa las tarjetas de paquetes dentro del chat */
 .chat-paquetes-container {
   display: flex;
   flex-direction: column;
@@ -766,7 +647,6 @@ h2 {
   margin-top: 10px;
 }
 
-/* Tarjeta individual de cada paquete */
 .chat-paquete-card {
   background: #ffffff;
   border: 2px solid #e2e8f0;
@@ -781,11 +661,10 @@ h2 {
 }
 
 .chat-paquete-card:hover {
-  border-color: #ffcf33; /* Resalta con tu color amarillo corporativo */
+  border-color: #ffcf33;
   transform: translateY(-2px);
 }
 
-/* Encabezado del paquete (Título y Precio) */
 .chat-paquete-header {
   display: flex;
   justify-content: space-between;
@@ -799,7 +678,7 @@ h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   font-weight: 800;
-  color: #01202c; /* Tu color azul marino principal */
+  color: #01202c;
   margin: 0;
   text-transform: uppercase;
 }
@@ -808,10 +687,9 @@ h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ffcf33; /* Resalte amarillo */
+  color: #ffcf33;
 }
 
-/* Lista de características incluidas en el paquete */
 .chat-paquete-caracteristicas {
   list-style: none;
   padding: 0;
@@ -829,13 +707,11 @@ h2 {
   gap: 8px;
 }
 
-/* Ícono de verificación (palomita) para las características */
 .chat-paquete-caracteristicas li i {
-  color: #2ecc71; /* Color verde de éxito */
+  color: #2ecc71;
   font-size: 0.85rem;
 }
 
-/* Botón para seleccionar o contratar el paquete */
 .btn-seleccionar-paquete {
   background-color: #01202c;
   color: #ffffff;
@@ -856,7 +732,6 @@ h2 {
   color: #01202c;
 }
 
-/* Etiqueta especial para paquetes destacados (ej. "Más Vendido") */
 .chat-paquete-badge {
   position: absolute;
   top: 0;
@@ -871,11 +746,8 @@ h2 {
   text-transform: uppercase;
 }
 
-/* ==========================================================================
-   AJUSTE PARA PANTALLAS MÓVILES (CELULARES) - RESPONSIVO DE PAQUETES
-   ========================================================================== */
+/* Paquetes - Móviles */
 @media (max-width: 767.98px) {
-  /* En móviles, aseguramos que aprovechen el 100% del ancho del chat */
   .chat-paquetes-container {
     gap: 12px;
     padding: 0 5px;
@@ -895,13 +767,35 @@ h2 {
   }
 
   .chat-paquete-caracteristicas li {
-    font-size: 0.75rem; /* Ajuste sutil de lectura para pantallas pequeñas */
+    font-size: 0.75rem;
   }
 }
 
+/* ============================================
+   10. TÍTULOS Y ANIMACIONES
+   ============================================ */
+h2 {
+  position: relative;
+  display: inline-block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate__fadeIn {
+  animation: fadeIn 0.5s;
+}
 
 /* ============================================
-   11. RESPONSIVE
+   11. RESPONSIVE GENERAL
    ============================================ */
 @media (max-width: 767px) {
   .vertical-divider-container {
@@ -930,4 +824,3 @@ h2 {
     margin: 0 15px;
   }
 }
-

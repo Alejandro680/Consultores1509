@@ -62,13 +62,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   isBrowser: boolean;
   isMenuOpen = false;
 
-toggleMenu() {
-  this.isMenuOpen = !this.isMenuOpen;
-}
 
-closeMenu() {
-  this.isMenuOpen = false;
-}
 
   private chatInicializado = false;
   private observer: IntersectionObserver | null = null;
@@ -178,26 +172,32 @@ closeMenu() {
       this.chatInicializado = true;
     }
   }
-ngAfterViewInit() {
-  const toggler = document.querySelector('.navbar-toggler');
-  const navbarCollapse = document.getElementById('navbarNav');
-  const navLinks = document.querySelectorAll('.nav-link');
 
-  // Toggle con hidden
-  toggler?.addEventListener('click', () => {
-    if (navbarCollapse) {
-      navbarCollapse.hidden = !navbarCollapse.hidden;
+  ngAfterViewInit() {
+     if (this.isBrowser) {
+    this.detectarElementosVisibles();
+  }
+  }
+
+  /**
+ * Cierra el menú hamburguesa SOLO en dispositivos móviles
+ */
+cerrarMenuMovil(): void {
+  if (!this.isBrowser) return;
+
+  // Solo ejecutar en móvil (pantalla menor a 992px)
+  if (window.innerWidth < 992) {
+    const menu = document.querySelector('.navbar-collapse');
+    const toggler = document.querySelector('.navbar-toggler');
+
+    if (menu && menu.classList.contains('show')) {
+      menu.classList.remove('show');
     }
-  });
 
-  // Cierre automático al hacer clic en un enlace
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (navbarCollapse) {
-        navbarCollapse.hidden = true;
-      }
-    });
-  });
+    if (toggler) {
+      toggler.setAttribute('aria-expanded', 'false');
+    }
+  }
 }
 
 

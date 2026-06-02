@@ -23,7 +23,7 @@ interface Servicio {
 export class HomeComponent implements AfterViewInit, OnInit {
 
   isBrowser: boolean;
-  showFloatingBtn = false;
+  showFloatingBtn = !false;
 
   // Slides del carrusel
   slides = [
@@ -133,7 +133,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private router: Router
+    private router: Router,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -141,6 +141,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
   irASobreNosotros(): void {
     this.router.navigate(['/sobre-nosotros']);
   }
+
+
 
   // ============================================
   // MÉTODO DE NAVEGACIÓN A SERVICIO ACTUALIZADO
@@ -186,21 +188,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
   }
 
-    abrirChatDirectoWhatsapp(): void {
-    if (!this.isBrowser) return;
 
-    // Tu número de teléfono con la clave del país (52 para México + tu número de 10 dígitos)
-    const telefono = '523319839037';
-
-    // Mensaje automático personalizado que ya va escrito para el cliente
-    const mensaje = encodeURIComponent('Hola Consultores 1509, vi su Proceso de Demanda en la página web y me interesa solicitar una llamada de asesoría inicial.');
-
-    // URL universal de WhatsApp (funciona perfecto en computadoras y en celulares)
-    const urlWhatsapp = `https://wa.me{telefono}?text=${mensaje}`;
-
-    // Abre el chat en una pestaña nueva sin cerrar tu página web
-    window.open(urlWhatsapp, '_blank');
-  }
 
   ngOnInit(): void {
     this.agruparServicios();
@@ -220,16 +208,16 @@ export class HomeComponent implements AfterViewInit, OnInit {
       // Inicializar carrusel de servicios (sin auto-desplazamiento)
       const servicesCarousel = document.getElementById('servicesCarousel');
       if (servicesCarousel) {
-        new bootstrap.Carousel(servicesCarousel, {
-          interval: false,
-          wrap: true
+      new bootstrap.ScrollSpy(document.body, {
+          target: '#navbar-example',
+          offset: 100
         });
       }
 
       // Inicializar ScrollSpy
       const spyElement = document.getElementById('spyNav');
       if (spyElement) {
-        new bootstrap.ScrollSpy(spyElement, {
+        new bootstrap.ScrollSpy(document.body, {
           target: '#navbar-example',
           offset: 100
         });
@@ -268,7 +256,7 @@ agruparServicios(): void {
           });
         }
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+    }, {  threshold: 0.1, rootMargin: '0px' });
 
     sections.forEach(section => observer.observe(section));
   }
