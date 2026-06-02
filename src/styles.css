@@ -1,1 +1,9 @@
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* Corta cualquier elemento oculto que se salga de la pantalla */
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}

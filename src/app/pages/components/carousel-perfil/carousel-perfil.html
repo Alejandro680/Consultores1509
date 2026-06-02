@@ -7,9 +7,11 @@
   <div class="carrusel-slides">
     @for (slide of slides; track $index; let i = $index) {
       <div class="carrusel-slide" [class.active]="i === slideActual">
+        <!-- SE MANTIENE TU GRID PERO SE ADAPTARÁ POR CSS -->
         <div class="tarjetas-grid">
           @for (perfil of slide; track perfil.id) {
-            <div class="tarjeta-perfil" (click)="seleccionarPerfil(perfil)">
+            <!-- Se añadió la clase col-12 para control responsivo -->
+            <div class="tarjeta-perfil col-12" (click)="seleccionarPerfil(perfil)">
               <div class="tarjeta-imagen">
                 <img [src]="perfil.imagen" [alt]="perfil.nombre">
               </div>

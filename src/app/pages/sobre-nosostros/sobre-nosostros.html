@@ -32,7 +32,7 @@
     <!-- VALORES SUPERIORES -->
     <div class="valores-superiores" [class.visible]="expanded" [hidden]="!expanded">
       @for (valor of valoresSuperiores; track valor.name) {
-        <div class="pildora">
+        <div class="pildora ">
           <div class="icono-pildora">
             @if (valor.iconType === 'fontawesome') {
               <i [class]="valor.icon"></i>

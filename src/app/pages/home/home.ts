@@ -118,12 +118,12 @@ export class HomeComponent implements AfterViewInit, OnInit {
       label: 'PROCESO DE DEMANDA',
       type: 'proceso',
       pasos: [
-        { number: 1, title: 'REQUEST CALL', desc: 'Solicita una llamada de asesoría inicial', icon: 'fas fa-phone-alt' },
-        { number: 2, title: 'CONSULTATION', desc: 'Consulta detallada de tu caso', icon: 'fas fa-comments' },
-        { number: 3, title: 'PLANNING', desc: 'Planificación estratégica', icon: 'fas fa-project-diagram' },
-        { number: 4, title: 'WORK PROCESS', desc: 'Proceso de trabajo legal', icon: 'fas fa-gavel' },
-        { number: 5, title: 'CORRECTING', desc: 'Ajustes y correcciones', icon: 'fas fa-pen-nib' },
-        { number: 6, title: 'DELIVER', desc: 'Entrega de resultados', icon: 'fas fa-check-double' }
+        { number: 1, title: 'Solicitar llamada', desc: 'Solicita una llamada de asesoría inicial', icon: 'fas fa-mobile-alt text-primary-dark' },
+        { number: 2, title: 'CONSULTA ', desc: 'Consulta detallada de tu caso', icon: 'fas fa-comments text-primary' },
+        { number: 3, title: 'PLANIFICACIÓN ', desc: 'Planificación estratégica', icon: 'fas fa-sitemap text-primary-dark' },
+        { number: 4, title: 'PROCESO DE TRABAJO', desc: 'Proceso de trabajo legal', icon: 'fas fa-cogs text-primary' },
+        { number: 5, title: 'CORRECCIÓN ', desc: 'Ajustes y correcciones',  icon: 'fas fa-pencil-alt text-primary-dark' },
+        { number: 6, title: 'ENTREGA ', desc: 'Entrega de resultados', icon: 'fas fa-check-square text-primary' }
       ],
       content: { button: 'CONTACTO' }
     }
@@ -186,8 +186,25 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
   }
 
+    abrirChatDirectoWhatsapp(): void {
+    if (!this.isBrowser) return;
+
+    // Tu número de teléfono con la clave del país (52 para México + tu número de 10 dígitos)
+    const telefono = '523319839037';
+
+    // Mensaje automático personalizado que ya va escrito para el cliente
+    const mensaje = encodeURIComponent('Hola Consultores 1509, vi su Proceso de Demanda en la página web y me interesa solicitar una llamada de asesoría inicial.');
+
+    // URL universal de WhatsApp (funciona perfecto en computadoras y en celulares)
+    const urlWhatsapp = `https://wa.me{telefono}?text=${mensaje}`;
+
+    // Abre el chat en una pestaña nueva sin cerrar tu página web
+    window.open(urlWhatsapp, '_blank');
+  }
+
   ngOnInit(): void {
     this.agruparServicios();
+
   }
 
   ngAfterViewInit(): void {
@@ -223,13 +240,18 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }, 500);
   }
 
-  agruparServicios(): void {
-    const serviciosRaw = this.items.find(i => i.type === 'servicios')?.servicios || [];
-    const TamañoGrupo = 3;
-    for (let i = 0; i < serviciosRaw.length; i += TamañoGrupo) {
-      this.serviciosAgrupados.push(serviciosRaw.slice(i, i + TamañoGrupo));
-    }
+
+
+agruparServicios(): void {
+  const serviciosRaw = this.items.find(i => i.type === 'servicios')?.servicios || [];
+  const TamañoGrupo = window.innerWidth < 768 ? 1 : 3; // 👈 cambia según tamaño
+  this.serviciosAgrupados = [];
+
+  for (let i = 0; i < serviciosRaw.length; i += TamañoGrupo) {
+    this.serviciosAgrupados.push(serviciosRaw.slice(i, i + TamañoGrupo));
   }
+}
+
 
   setupIntersectionObserver(): void {
     const sections = document.querySelectorAll('section');
@@ -268,9 +290,18 @@ export class HomeComponent implements AfterViewInit, OnInit {
     updateCounter();
   }
 
+  @HostListener('window:resize', [])
+onResize() {
+  this.serviciosAgrupados = [];
+  this.agruparServicios();
+}
+
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     if (!this.isBrowser) return;
     this.showFloatingBtn = window.scrollY > 800;
   }
 }
+
+

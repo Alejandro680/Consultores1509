@@ -60,6 +60,15 @@ interface InfoCliente {
 export class App implements OnInit, AfterViewInit, OnDestroy {
 
   isBrowser: boolean;
+  isMenuOpen = false;
+
+toggleMenu() {
+  this.isMenuOpen = !this.isMenuOpen;
+}
+
+closeMenu() {
+  this.isMenuOpen = false;
+}
 
   private chatInicializado = false;
   private observer: IntersectionObserver | null = null;
@@ -161,20 +170,37 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
+
+
   ngOnInit(): void {
     if (!this.chatInicializado) {
       this.inicializarChatbot();
       this.chatInicializado = true;
     }
   }
+ngAfterViewInit() {
+  const toggler = document.querySelector('.navbar-toggler');
+  const navbarCollapse = document.getElementById('navbarNav');
+  const navLinks = document.querySelectorAll('.nav-link');
 
-  ngAfterViewInit(): void {
-    if (this.isBrowser) {
-      setTimeout(() => {
-        this.detectarElementosVisibles();
-      }, 100);
+  // Toggle con hidden
+  toggler?.addEventListener('click', () => {
+    if (navbarCollapse) {
+      navbarCollapse.hidden = !navbarCollapse.hidden;
     }
-  }
+  });
+
+  // Cierre automático al hacer clic en un enlace
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (navbarCollapse) {
+        navbarCollapse.hidden = true;
+      }
+    });
+  });
+}
+
+
 
   ngOnDestroy(): void {
     if (this.observer) {

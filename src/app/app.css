@@ -51,11 +51,46 @@ main {
   min-height: calc(100vh - 130px);
 }
 
+.navbar-collapse {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform-origin: top;
+}
+
+.navbar-collapse[hidden] {
+  opacity: 0;
+  transform: scaleY(0.9);
+  pointer-events: none;
+}
+
+.navbar-collapse:not([hidden]) {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+
+
+
 .sobre-nosotros {
   min-height: 500px;  /* Fuerza altura mínima */
   padding-bottom: 3rem;
 }
 
+@media (max-width: 767px) {
+  .navbar {
+    padding: 0.4rem 1rem;
+    border-radius: 0;
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
+  .navbar-brand img {
+    height: 80px;
+  }
+}
 
 /* ============================================
    2. FOOTER
@@ -156,6 +191,32 @@ main {
   font-size: 1.1rem;
   font-weight: 600;
 }
+
+@media (max-width: 767px) {
+  .social-icons-wrapper,
+  .d-flex.gap-3.fs-4 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .social-icon {
+    font-size: 1.6rem;
+    margin: 0 10px;
+  }
+
+  .footer-logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-legal h4 {
+    text-align: center;
+  }
+}
+
 
 /* ============================================
    3. BOTÓN FLOTANTE DE CURSOS
@@ -868,14 +929,21 @@ section {
     right: 20px;
   }
 
+  /* ============================================
+   CHATBOT RESPONSIVO
+   ============================================ */
+
+/* Tablets y móviles grandes */
+@media (max-width: 992px) {
   .chatbot-float-btn {
     bottom: 80px;
     padding: 8px 12px;
+    gap: 8px;
   }
 
   .chatbot-float-btn .chatbot-icon {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
   }
 
   .chatbot-float-btn .chatbot-icon i {
@@ -889,6 +957,80 @@ section {
   .chatbot-subtitle {
     font-size: 0.55rem;
   }
+
+  .chatbot-window {
+    width: calc(100vw - 60px);
+    height: calc(100vh - 140px);
+    left: 30px;
+    bottom: 90px;
+  }
+}
+
+/* Móviles medianos */
+@media (max-width: 768px) {
+  .chatbot-float-btn {
+    bottom: 70px;
+    padding: 6px 10px;
+  }
+
+  .chatbot-float-btn .chatbot-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .chatbot-float-btn .chatbot-icon i {
+    font-size: 20px;
+  }
+
+  .chatbot-title {
+    font-size: 0.8rem;
+  }
+
+  .chatbot-subtitle {
+    font-size: 0.5rem;
+  }
+
+  .chatbot-window {
+    width: calc(100vw - 40px);
+    height: calc(100vh - 120px);
+    left: 20px;
+    bottom: 80px;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .chatbot-float-btn {
+    bottom: 60px;
+    padding: 5px 8px;
+    gap: 6px;
+  }
+
+  .chatbot-float-btn .chatbot-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .chatbot-float-btn .chatbot-icon i {
+    font-size: 18px;
+  }
+
+  .chatbot-title {
+    font-size: 0.75rem;
+  }
+
+  .chatbot-subtitle {
+    font-size: 0.45rem;
+  }
+
+  .chatbot-window {
+    width: calc(100vw - 30px);
+    height: calc(100vh - 100px);
+    left: 15px;
+    bottom: 70px;
+  }
+}
+
 }
 
 

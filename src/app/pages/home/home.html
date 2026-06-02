@@ -1,9 +1,9 @@
 <div data-bs-spy="scroll" data-bs-target="#navbar-example" data-bs-offset="100">
   <!-- CONTENIDO PRINCIPAL -->
   <div>
-    <!-- Carousel debajo del nav -->
+    <!-- Carrusel debajo de la barra de navegación -->
     <div id="mainCarousel" class="carousel slide mt-6 pt-6" data-bs-ride="carousel">
-      <!-- indicadores dinámicos -->
+      <!-- Indicadores dinámicos -->
       <div class="carousel-indicators">
         @for (slide of slides; track $index; let i = $index) {
           <button
@@ -18,7 +18,7 @@
         }
       </div>
 
-      <!-- items -->
+      <!-- Diapositivas -->
       <div class="carousel-inner">
         @for (slide of slides; track $index; let i = $index) {
           <div class="carousel-item" [class.active]="i === 0">
@@ -30,7 +30,7 @@
         }
       </div>
 
-      <!-- controles -->
+      <!-- Controles de navegación -->
       <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev" aria-label="Anterior">
         <span class="carousel-control-prev-icon"></span>
       </button>
@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <!-- Secciones scrollspy -->
+  <!-- Secciones del detector de desplazamiento (ScrollSpy) -->
   <div id="spyNav" class="scrollspy-example mt-5 pt-5">
     @for (item of items; track item.id) {
       <section [id]="item.id" class="container my-5">
@@ -48,7 +48,7 @@
           <h2 class="fw-bold">{{ item.label }}</h2>
         </div>
 
-
+        <!-- Sección: Quiénes Somos -->
         @if (item.type === 'quienes') {
           <div class="row align-items-center position-relative">
             <div class="col-md-5 description-area pe-md-5">
@@ -86,15 +86,15 @@
           </div>
         }
 
+        <!-- Sección: Servicios -->
         @else if (item.type === 'servicios') {
-          <!-- Carrusel de servicios SIN auto-desplazamiento -->
           <div id="servicesCarousel" class="carousel slide" data-bs-ride="false">
             <div class="carousel-inner">
               @for (grupo of serviciosAgrupados; track $index; let isFirst = $first) {
                 <div class="carousel-item" [class.active]="isFirst">
-                  <div class="row g-4 justify-content-center pt-5">
+                  <div class="row g-4 justify-content-center pt-5 carrusel-movil-ajuste">
                     @for (servicio of grupo; track servicio.title) {
-                      <div class="col-md-4 d-flex">
+                      <div class="col-12 col-md-4 d-flex">
                         <div class="service-card d-flex flex-column w-100">
                           <div class="service-icon-container">
                             <img [src]="servicio.icon" [alt]="servicio.title">
@@ -123,6 +123,7 @@
           </div>
         }
 
+        <!-- Sección: Cursos -->
         @else if (item.id === 'cursos') {
           <div class="curso-container p-4 p-md-5 mb-5 animate__animated animate__fadeIn">
             <div class="row align-items-center">
@@ -158,46 +159,51 @@
           </div>
         }
 
+        <!-- Sección: Proceso (Línea de Tiempo con Iconos FontAwesome) -->
         @else if (item.type === 'proceso') {
           <div class="row mb-5 py-5">
             <div class="col-12">
-              <div class="proceso-wrapper d-flex flex-column flex-md-row justify-content-center align-items-start">
-                @for (paso of item.pasos; track paso.number; let isLast = $last) {
-                  <div class="proceso-item text-center animate__animated animate__fadeInUp"
-                      [style.animation-delay]="(paso.number * 100) + 'ms'">
-                    <div class="circle-container position-relative mb-4">
-                      <span class="step-number shadow-sm">{{ paso.number }}</span>
-                      <div class="icon-circle shadow-sm">
-                        <i [class]="paso.icon" class="fa-2x text-navy"></i>
+              <div class="proceso-wrapper">
+
+                @for (step of item.pasos; track step.number) {
+                  <div class="proceso-paso">
+                    <div class="proceso-circulo-wrapper">
+                      <span class="proceso-numero">{{ step.number }}</span>
+                      <div class="proceso-icono">
+                        <!-- Enlace dinámico de clases de FontAwesome -->
+                        <i [ngClass]="step.icon"></i>
                       </div>
                     </div>
-                    <h5 class="fw-bold text-uppercase mb-2 step-title">{{ paso.title }}</h5>
-                    <p class="small text-muted mb-0 step-desc px-3">{{ paso.desc }}</p>
+                    <h4 class="proceso-titulo">{{ step.title }}</h4>
+                    <p class="proceso-texto">{{ step.desc }}</p>
                   </div>
                 }
               </div>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="col-12 text-center">
-              <button class="btn-contacto-proceso shadow-sm">{{ item.content?.button }}</button>
+
+              <!-- Botón inferior de atajo al chatbot -->
+              <div class="proceso-boton-wrapper text-center mt-5">
+                <button
+                  type="button"
+                  class="btn btn-contacto text-uppercase fw-bold"
+                  (click)=" abrirChatDirectoWhatsapp()">
+                  {{ item.content?.button || 'CONTACTO' }}
+                </button>
+              </div>
             </div>
           </div>
         }
       </section>
     }
-  </div>
-
-  <!-- Botón flotante de cursos -->
-  <div class="floating-course-btn shadow-lg d-none d-md-flex" [class.visible]="showFloatingBtn">
-    <div class="btn-icon">
-      <img src="assets/ICONO 4-01.png" alt="Icono PLD">
-    </div>
-    <div class="btn-content text-center">
-      <span class="btn-title">CURSO PLD</span>
-      <span class="btn-subtitle">PRESENCIAL Y VIA ZOOM</span>
-      <a href="#cursos" class="btn-action" (click)="scrollToCursos($event)">CLICK AQUÍ</a>
-    </div>
-  </div>
-
+    <!-- Botón flotante de cursos -->
+            <div class="floating-course-btn shadow-lg d-none d-md-flex" [class.visible]="showFloatingBtn">
+              <div class="btn-icon">
+                <img src="assets/ICONO 4-01.png" alt="Icono PLD">
+              </div>
+              <div class="btn-content text-center">
+                <span class="btn-title">CURSO PLD</span>
+                <span class="btn-subtitle">PRESENCIAL Y VIA ZOOM</span>
+                <a href="#cursos" class="btn-action" (click)="scrollToCursos($event)">CLICK AQUÍ</a>
+              </div>
+            </div>
+            </div>
 </div>
